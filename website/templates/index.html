@@ -3,11 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./static/style.css">
-    <title>Teste conexão com front</title>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="icon" href="../static/asset/cps.jpg">
+    <title>Ergolist - Fatec Arthur de Azevedo</title>
 </head>
 <body>
-    <h1>Home Page</h1>
-    <a href="{{url_for('login')}}">Login Page</a>
+    <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="{{url_for('home')}}">Checklist de Usabilidade</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{{url_for('home')}}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Checklist</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contacto</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Meu perfil</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Full Page Image Header with Vertically Centered Content -->
+  <header class="masthead">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center">
+        <div class="col-12 text-center">
+          <h1 class="fw-light">Site de Usabilidade</h1>
+          <p class="lead">Esta ferramenta foi desenvolvida por alunos da matéria de Interação Homem Computador(IHC), com objetivo de trazer uma atualização
+            do antigo validador de usabilidade Ergolist, desenvolvido pela UFSC.
+            Esta atualização traz consigo perguntas atualizadas de acordo com a ABNT NBR ISO 9241-11:2021, e também uma opção de cadastro,
+            onde você poderá se cadastrar, mantendo suas validações salvas no seu dashboard.
+            Você também tem a opção de não precisar se cadastrar, porém suas validações não ficaram salvas, e perderá as respostas assim que recarregar a página.
+            Clique abaixo para fazer o login, ou começar uma nova validação como usuário anonimo.</p><br>
+            <div class="login-bottom-homepage">
+                <a href="{{url_for('login')}}">Faça o Login</a>
+            </div>
+            <div class="start-bottom-homepage">
+                <a href="">Nova validação</a>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Page Content
+  <section class="py-5">
+    <div class="container">
+      <h2 class="fw-light">Page Content</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus ab nulla dolorum autem nisi officiis
+        blanditiis voluptatem hic, assumenda aspernatur facere ipsam nemo ratione cumque magnam enim fugiat
+        reprehenderit expedita.</p>
+    </div>
+  </section> -->
+
+  <!-- Footer-->
+  <footer class="py-5 bg-dark">
+    <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+</footer>
+    <!-- <h1>Check-List de Usabilidade</h1>
+    <h2></h2> -->
+
+    <!-- <a href="{{url_for('login')}}">Login Page</a><br>
+    <a href="{{url_for('register')}}">Register Page</a><br> -->
+
+    <script src="../static/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/script.js"></script>
 </body>
 </html>
