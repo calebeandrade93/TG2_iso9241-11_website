@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../static/style.css">
-        <link rel="icon" href="../static/asset/cps.jpg">
-        <title>Ergolist - Fatec Arthur de Azevedo</title>
-    </head>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/style.css">
+  <link rel="icon" href="../static/asset/cps.jpg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Ergolist - Fatec Arthur de Azevedo</title>
+</head>
+
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
     <div class="container">
       <a class="navbar-brand" href="{{url_for('home')}}">Checklist de Usabilidade</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -35,28 +39,39 @@
     </div>
   </nav>
 
-<!-- Content -->
-    <div class="back">
-        <div class="div-center">
-          <div class="content">
-            <h3>Login</h3>
-            <hr />
-            <form>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Endereço de Email</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="email@email.com">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1">Senha</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="**********">
-              </div>
-              <button type="submit" class="btn btn-primary">Login</button>
-              <hr />
-              <button type="button" class="btn btn-link">Registrar</button>
-              <button type="button" class="btn btn-link">Recuperar Senha</button>   
-            </form>     
-          </div>      
-          </span>
-        </div>
+  <!-- Content -->
+  <div class="back">
+    <div class="div-center">
+      <div class="content">
+        <h3>Login</h3>
+        <hr />
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Endereço de Email</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="email@email.com">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Senha</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="**********">
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+          <hr />
+          <button type="button" class="btn btn-link">Registrar</button>
+          <button type="button" class="btn btn-link">Recuperar Senha</button>
+        </form>
+      </div>
+      </span>
+    </div>
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container px-4 px-lg-5">
+        <p class="m-0 text-center text-white">Copyright &copy; <a href="https://fatecmm.cps.sp.gov.br/">Fatec Arthur de
+            Azevedo</a> 2024</p>
+        <a href="https://github.com/calebeandrade93/TG2_iso9241-11_website" target="_blank">
+          <i class="fa fa-github" style="font-size:48px;color:rgb(255, 255, 255)"></i>
+        </a>
+      </div>
+    </footer>
 </body>
+
 </html>
