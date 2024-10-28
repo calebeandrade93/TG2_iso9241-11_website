@@ -6,7 +6,7 @@ Trabalho de Graduação do curso Analise e Desenvolvimento de Sistemas, da facul
 
 Entre na pasta mova seu terminal para pasta app
 Execute o comando no bash: ```python -m venv .venv```
-Para habilitar o ambiente virtual, no bash execute ```source .venv/Scripts/activate```
+Para habilitar o ambiente virtual, no bash execute dentro da pasta website ```source .venv/Scripts/activate```
 Após habilitar o ambiente virtual, execute o comando ```python.exe -m pip install --upgrade pip``` para atualizar o pip
 Após atualizar o ambiente pip, execute o comando no bash ```pip install -r requirements.txt``` para realizar o download das dependencias.
 
