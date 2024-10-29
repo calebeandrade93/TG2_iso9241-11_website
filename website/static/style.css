@@ -60,7 +60,8 @@ footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  background-color: #343a40; /* Cor de fundo do footer */
+  background-color: #0f66a0; /* Cor de fundo do footer */
   color: #ffffff; /* Cor do texto no footer */
   padding: 10px 0; /* Espaçamento interno do footer */
 }
+

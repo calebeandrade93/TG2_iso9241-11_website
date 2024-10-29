@@ -75,8 +75,17 @@ Clique em **Advanced Connection Options -> Authentication -> Username/Password**
 
 <img src="./docs/images/exemplo-conexao.png" alt="exemplo-conexao" width="50%">
 
-Após feito a conexão, crie uma nova **database**, e adicione duas collections **usarData** e **userAnswers**.
-Seu banco de dados deverá ficar igual na imagem abaixo.
+Após feito a conexão, crie uma nova **database**, e adicione duas collections necessárias de acordo com o diagrama.
 
 <img src="./docs/images/criacao-dbs.png" alt="autenticacao" width="50%">
+
+
+### Inserindo os modelos nas bases
+
+Olhe na pasta de documentação, e procure o json com o nome de cada **collection**, e execute no prompet do mongo compass, repitindo o processo pras demais collections.
+
+<img src="./docs/images/adicionando-objeto.png" alt="adicionando-objeto" width="50%">
+
+
+
 

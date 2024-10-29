@@ -1,0 +1,16 @@
+{
+    "name": "icone de fechar",
+    "descripton": "É indispensável a utilização da letra \"X\" como ícone para fechar o navegador do usuário. Deverá seguir o padrão de cor vermelha para conforme dita a iso."
+},
+{
+    "name": "icone de minimizar",
+    "descripton": "É indispensável a utilização de \"-\" como ícone para minimizar o navegador do usuário. Deverá seguir o padrão de cor azul para conforme dita a iso."
+},
+{
+    "name": "icone de maximizar",
+    "descripton": "É indispensável a utilização do quadrado \"[]\" como ícone para maximizar o navegador do usuário. Deverá seguir o padrão de cor verde para conforme dita a iso."
+},
+{
+    "name": "duplo clique com o mouse",
+    "descripton": "A função do duplo clique deve ser a mesma do enter."
+}
