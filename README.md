@@ -86,6 +86,3 @@ Olhe na pasta de documentação, e procure o json com o nome de cada **collectio
 
 <img src="./docs/images/adicionando-objeto.png" alt="adicionando-objeto" width="50%">
 
-
-
-
