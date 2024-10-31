@@ -41,31 +41,7 @@
   </nav>
 
     <!-- Content -->
-    <div class="back">
-        <div class="div-center">
-            <div class="content">
-                <h3>Validar E-mail</h3>
-                <hr />
-                <form method="POST" action="{{ url_for('verify_email') }}">
-                    <div class="form-group">
-                        <label for="email">Endereço de Email</label>
-                        <input type="text" class="form-control" id="email" name="email" placeholder="email@email.com"
-                            required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email_code">Código</label>
-                        <input type="text" class="form-control" id="email_code" name="email_code" placeholder="00000000"
-                            required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Enviar</button>
-                    <button type="button" class="btn btn-secondary">Cancelar</button>
-                    <hr />
-                    <p>O código não chegou ? <a href="{{url_for('resend_email_code')}}">Reenvie o código</a></p>
-                </form>
-            </div>
-        </div>
-    </div>
-
+    <h1>PAGINA DO USUARIO</h1>
 
         <!-- Footer-->
     <footer class="py-5 bg-dark">

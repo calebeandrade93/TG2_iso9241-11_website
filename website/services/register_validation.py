@@ -14,9 +14,7 @@ class RegisterValidation:
         self.phone = phone
         self.email_code = self.generate_random_number_sequence()
 
-    def validate_email(self):
-        if not "@" in self.email or not "." in self.email:
-            return False, "O formato de e-mail informado é inválido.", None
+    def validate_email(self, is_user_registered):
         
         is_email_sent, message = self.send_verification_email()
         if not is_email_sent:
