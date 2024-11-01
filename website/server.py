@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, request, render_template, redirect, url_for, flash
+from flask import Flask, request, render_template, redirect, url_for, session
 from services.register_validation import RegisterValidation
 from services.retry_email import RetryEmail
 from services.mongodb import Mongodb 
@@ -10,6 +10,7 @@ from datetime import datetime
 
 app = Flask(__name__, template_folder='templates')
 app.secret_key = 'mysecretkey'
+app.config['SESSION_PERMANENT'] = False  # Define a sessão como não permanente
 db_client = Mongodb()
 load_dotenv()
 
@@ -19,16 +20,33 @@ def home():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        email = request.form['email'].strip()
+        password = request.form['senha'].strip()
+        
+        user = db_client.get_user(email)
+        if user and check_password(password, user['pwd_hash']):
+            session['user_id'] = str(user['_id'])  # Guardar o ID do usuário na sessão
+            return redirect(url_for('home'))
+        else:
+            return redirect(url_for('login', message="Email ou senha incorretos."))
+    
     return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('user_id', None)
+    return redirect(url_for('home'))
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    session.pop('user_id', None)
     if request.method == 'POST':
-        name = request.form['nome']
-        email = request.form['email']
-        password = request.form['senha']
-        confirm_password = request.form['confirma_senha']
-        phone = request.form['telefone']
+        name = request.form['nome'].strip()
+        email = request.form['email'].strip()
+        password = request.form['senha'].strip()
+        confirm_password = request.form['confirma_senha'].strip()
+        phone = request.form['telefone'].strip()
 
         if not "@" in email or not "." in email:
             return redirect(url_for('register', message='Formato de e-mail inválido.'))
@@ -71,8 +89,9 @@ def register():
 
 @app.route('/verify_email', methods=['GET', 'POST'])
 def verify_email():
+    session.pop('user_id', None)
     if request.method == 'POST':
-        email = request.form['email']
+        email = request.form['email'].strip()
         email_code = request.form['email_code'].strip()
 
         if not "@" in email or not "." in email:
@@ -94,14 +113,15 @@ def verify_email():
         
         db_client.update_user(email, {'is_verified': True})
         print('Email verificado com sucesso')
-        return redirect(url_for('user_page', message='Email verificado com sucesso'))
+        return redirect(url_for('login', message='Email verificado com sucesso'))
 
     return render_template('verify_email.html')
 
 @app.route('/resend_email_code', methods=['GET', 'POST'])
 def resend_email_code():
+    session.pop('user_id', None)
     if request.method == 'POST':
-        email = request.form['email']
+        email = request.form['email'].strip()
         is_user_registered = db_client.get_user(email)
 
         if not "@" in email or not "." in email:
@@ -129,6 +149,23 @@ def resend_email_code():
 
     return render_template('resend_email.html')
 
+@app.route('/forgot_password', methods=['GET', 'POST'])
+def forgot_password():
+    session.pop('user_id', None)
+    return render_template('forgot_password.html')
+
+@app.route('/change_password', methods=['GET', 'POST'])
+def change_password():
+    return render_template('change_password.html')
+
 @app.route('/user_page')
 def user_page():
     return render_template('user_page.html')
+
+@app.route('/new_checklist')
+def new_checklist():
+    return render_template('new_checklist.html')
+
+@app.route('/checklist')
+def checklist():
+    return render_template('checklist.html')

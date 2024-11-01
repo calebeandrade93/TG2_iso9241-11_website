@@ -14,7 +14,7 @@ class RegisterValidation:
         self.phone = phone
         self.email_code = self.generate_random_number_sequence()
 
-    def validate_email(self, is_user_registered):
+    def validate_email(self):
         
         is_email_sent, message = self.send_verification_email()
         if not is_email_sent:
