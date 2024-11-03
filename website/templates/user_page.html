@@ -9,6 +9,11 @@
     <link rel="icon" href="../static/asset/cps.jpg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Painel do Usuário - TelaAudit</title>
+    <script>
+      function confirmDelete() {
+        return confirm('Você tem certeza que deseja excluir este checklist?');
+      }
+    </script>
 </head>
 
 <body>
@@ -78,7 +83,7 @@
               <button type="submit" formaction="{{ url_for('checklist') }}" class="btn btn-primary">Exportar Checklist</button>
               <a href="{{ url_for('checklist') }}" class="btn btn-success">Novo Checklist</a>
               <button type="submit" formaction="{{ url_for('checklist') }}" class="btn btn-warning">Editar Checklist</button>
-              <button type="submit" formaction="{{ url_for('checklist') }}" class="btn btn-danger">Deletar Checklist</button>
+              <button type="submit" formaction="{{ url_for('checklist') }}" class="btn btn-danger" onclick="return confirmDelete()">Deletar Checklist</button>
             </div>
           </form>
         </div>

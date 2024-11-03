@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../static/style.css">
     <link rel="icon" href="../static/asset/cps.jpg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Painel do Usuário - TelaAudit</title>
+    <title>Checklist Page</title>
 </head>
 
 <body>
@@ -49,22 +49,47 @@
     </div>
   </nav>
 
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <h4>Olá, {{ user_name }}</h4>
-    <a href="{{ url_for('change_password') }}">Trocar senha</a>
-    <a href="{{ url_for('change_phone') }}">Trocar número de telefone</a>
-    <a href="{{ url_for('logout') }}">Logout</a>
-  </div>
-
-  <!-- Content -->
-  <header class="masthead">
-    <h1>CHECKLIST PAGE</h1>
-    <div class="buttons">
-        <button type="button" class="btn btn-success">Salvar</button>
+ <!-- Content -->
+ <header class="masthead">
+  <h1>CHECKLIST PAGE</h1>
+  <div class="container mt-5">
+    {% for module, questions in template.items() %}
+    <div class="accordion" id="accordion{{ loop.index }}">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="heading{{ loop.index }}">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}" aria-expanded="true" aria-controls="collapse{{ loop.index }}">
+            {{ module }}
+          </button>
+        </h2>
+        <div id="collapse{{ loop.index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ loop.index }}" data-bs-parent="#accordion{{ loop.index }}">
+          <div class="accordion-body">
+            {% for question in questions %}
+            <div class="mb-3">
+              <label class="form-label"><strong>{{ question.keys() | list | first }}</strong></label>
+              <p>
+                <br>
+                <input type="radio" name="answer_{{ loop.index }}" value="True" {% if question.values() | list | first == True %}checked{% endif %}> Sim
+                <span style="margin-right: 10px;"></span>
+                <input type="radio" name="answer_{{ loop.index }}" value="False" {% if question.values() | list | first == False %}checked{% endif %}> Não
+                <span style="margin-right: 10px;"></span>
+                <input type="radio" name="answer_{{ loop.index }}" value="None" {% if question.values() | list | first == None %}checked{% endif %}> Não se aplica
+              </p>
+              <p><em>Notes:</em></p>
+              <textarea class="form-control" name="notes">{{ question['notes'] }}</textarea>
+              <p><em>Glossary:</em> {{ question['glossary'] }}</p>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
     </div>
+    {% endfor %}
+  </div>
+  <div class="buttons mt-3">
+    <button type="button" class="btn btn-success">Salvar</button>
+  </div>
+</header>
 
-  </header>
 
   <!-- Footer -->
   <footer class="py-5 bg-dark">

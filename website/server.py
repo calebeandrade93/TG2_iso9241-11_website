@@ -6,6 +6,7 @@ from services.retry_email import RetryEmail
 from services.mongodb import Mongodb 
 from services.encrypt_service import hash_password, check_password
 from services.forgot_password import ForgotPassword
+from services.build_template import BuildTemplate
 from dotenv import load_dotenv
 from datetime import datetime
 from bson.objectid import ObjectId
@@ -248,9 +249,16 @@ def checklist():
         
         checklist = db_client.get_checklist_by_id(ObjectId(checklist_id))
         print(checklist)
+
+        questions = db_client.get_questions()
+        user_answers = checklist.get('answers')
+
+        template = BuildTemplate.build(questions, user_answers)
+
+        return render_template('checklist.html', template=template)
         
 
-    return render_template('index.html')
+    return render_template('checklist.html')
 
 @app.route('/change_phone', methods=['GET', 'POST'])
 def change_phone():

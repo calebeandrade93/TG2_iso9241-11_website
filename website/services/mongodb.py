@@ -31,6 +31,9 @@ class Mongodb:
         checklist = self.db.userChecklist.find_one({"_id": checklist_id})
         return checklist
 
+    def get_questions(self):
+        questions = self.db.question.find()
+        return list(questions)
     
 
         
