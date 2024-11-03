@@ -40,9 +40,15 @@
           <li class="nav-item">
             <a class="nav-link" href="{{url_for('user_page')}}">Meu perfil</a>
           </li>
+          {% if 'user_id' in session %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('logout')}}">Logout</a>
+          </li>
+          {% else %}
           <li class="nav-item">
             <a class="nav-link" href="{{url_for('login')}}">Login</a>
           </li>
+          {% endif %}
         </ul>
       </div>
     </div>
@@ -52,23 +58,34 @@
     <div class="back">
         <div class="div-center">
             <div class="content">
-                <h3>Validar E-mail</h3>
+                <h3>Troca número telefone</h3>
                 <hr />
-                <form method="POST" action="{{ url_for('verify_email') }}">
+                <form method="POST" action="{{ url_for('change_phone') }}">
                     <div class="form-group">
                         <label for="email">Endereço de Email</label>
-                        <input type="text" class="form-control" id="email" name="email" placeholder="email@email.com"
+                        <input type="email" class="form-control" id="email" name="email" placeholder="email@email.com"
                             required>
                     </div>
                     <div class="form-group">
-                        <label for="email_code">Código</label>
-                        <input type="text" class="form-control" id="email_code" name="email_code" placeholder="00000000"
+                        <label for="senha">Senha</label>
+                        <input type="password" class="form-control" id="senha" name="senha" placeholder="**********"
                             required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefone">Número antigo</label>
+                        <input type="tel" class="form-control" id="telefone_antigo" name="telefone_antigo"
+                            placeholder="(xx)xxxxxx-xxxx" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefone">Número novo</label>
+                        <input type="tel" class="form-control" id="telefone_novo" name="telefone_novo"
+                            placeholder="(xx)xxxxxx-xxxx" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Enviar</button>
                     <button type="button" class="btn btn-secondary" onclick="redirectToHome()">Cancelar</button>
                     <hr />
-                    <p>O código não chegou ? <a href="{{url_for('resend_email_code')}}">Reenvie o código</a></p>
+                    <p>Já é registrado ? <a href="{{url_for('login')}}">Faça o Login</a></p>
+                    <p>Não é registrado ? <a href="{{url_for('register')}}">Registrar</a></p>
                 </form>
             </div>
         </div>

@@ -1,67 +1,161 @@
 .masthead {
-    height: 100vh;
-    min-height: 500px;
-    background-image: url('https://source.unsplash.com/BtbjCFUvBXs/1920x1080');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background: #e2e2e2;
-  }
+  height: 100vh;
+  min-height: 500px;
+  background-image: url('https://source.unsplash.com/BtbjCFUvBXs/1920x1080');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background: #e2e2e2;
+}
 
 .back {
-    background: #e2e2e2;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-  }
-  
-.div-center {
-    width: 400px;
-    height: 400px;
-    background-color: #fff;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    max-width: 100%;
-    max-height: 100%;
-    overflow: auto;
-    padding: 1em 2em;
-    border-bottom: 2px solid #ccc;
-    display: table;
-  }
-  
-div.content {
-    display: table-cell;
-    vertical-align: middle;
-  }
+  background: #e2e2e2;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
 
-  .bottom-homepage {
-    display: inline-block;
-    padding: 20px;
-    background-color: #b4b7b9;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+.div-center {
+  width: 400px;
+  height: 400px;
+  background-color: #fff;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
+  padding: 1em 2em;
+  border-bottom: 2px solid #ccc;
+  display: table;
+}
+
+div.content {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.bottom-homepage {
+  display: inline-block;
+  padding: 20px;
+  background-color: #b4b7b9;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 .bottom-homepage:hover {
-    background-color: #b5b8bb;
+  background-color: #b5b8bb;
 }
-
-/* style.css */
 
 /* Estilo para o footer */
 footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
   background-color: #0f66a0; /* Cor de fundo do footer */
   color: #ffffff; /* Cor do texto no footer */
   padding: 10px 0; /* Espaçamento interno do footer */
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
+/* Estilo para a sidebar */
+.sidebar {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #f8f9fa;
+  padding-top: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar h4 {
+  margin-bottom: 20px;
+}
+
+.sidebar a {
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #333;
+  display: block;
+}
+
+.sidebar a:hover {
+  background-color: #ddd;
+}
+
+/* Estilo para o conteúdo */
+.content {
+  margin-left: 260px;
+  padding: 20px;
+  padding-bottom: 100px; /* Adiciona espaço extra na parte inferior */
+}
+
+/* Estilo para os blocos de checklist */
+.checklist-box {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  background-color: #f8f9fa;
+}
+
+.checklist-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.checklist-box {
+  flex: 1 1 calc(33.333% - 20px);
+  box-sizing: border-box;
+}
+
+/* Estilo para os botões */
+.buttons {
+  margin-top: 20px;
+}
+
+
+/* Estilo personalizado para os botões de checklist */
+.custom-button {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  color: #333;
+  text-align: left;
+  width: 100%;
+  padding: 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.custom-button:hover {
+  background-color: #ffffff;
+  color: #333;
+  text-decoration: none;
+}
+
+.custom-button h5 {
+  margin: 0;
+  text-decoration: none;
+  flex-grow: 1;
+}
+
+/* Adicionar espaço entre o ícone de rádio e o texto */
+.custom-button input[type="radio"] {
+  margin-right: 10px;
+}

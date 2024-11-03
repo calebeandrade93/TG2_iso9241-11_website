@@ -50,8 +50,8 @@
   </nav>
 
   <!-- Sidebar -->
-  <div class="sidebar d-flex flex-column justify-content-center align-items-center">
-    <h4>Olá, {{ user_name }}</h4><br>
+  <div class="sidebar">
+    <h4>Olá, {{ user_name }}</h4>
     <a href="{{ url_for('change_password') }}">Trocar senha</a>
     <a href="{{ url_for('change_phone') }}">Trocar número de telefone</a>
     <a href="{{ url_for('logout') }}">Logout</a>
@@ -59,31 +59,11 @@
 
   <!-- Content -->
   <header class="masthead">
-    <div class="container h-100">
-      <div class="row h-100 align-items-center">
-        <div class="col-12 text-center">
-          <h1 class="fw-light">Lista de Checklists</h1><br>
-          <form id="checklist-form" method="POST" action="">
-            <div class="row checklist-container">
-              {% for checklist in user_checklists %}
-              <div class="col-md-4">
-                <div class="checklist-box custom-button">
-                  <input type="radio" name="checklist_id" value="{{ checklist._id }}">
-                  <h5>{{ checklist.name }}</h5>
-                </div>
-              </div>
-              {% endfor %}
-            </div>
-            <div class="buttons">
-              <button type="submit" formaction="{{ url_for('checklist') }}" class="btn btn-primary">Exportar Checklist</button>
-              <a href="{{ url_for('checklist') }}" class="btn btn-success">Novo Checklist</a>
-              <button type="submit" formaction="{{ url_for('checklist') }}" class="btn btn-warning">Editar Checklist</button>
-              <button type="submit" formaction="{{ url_for('checklist') }}" class="btn btn-danger">Deletar Checklist</button>
-            </div>
-          </form>
-        </div>
-      </div>
+    <h1>CHECKLIST PAGE</h1>
+    <div class="buttons">
+        <button type="button" class="btn btn-success">Salvar</button>
     </div>
+
   </header>
 
   <!-- Footer -->

@@ -5,8 +5,10 @@ from services.register_validation import RegisterValidation
 from services.retry_email import RetryEmail
 from services.mongodb import Mongodb 
 from services.encrypt_service import hash_password, check_password
+from services.forgot_password import ForgotPassword
 from dotenv import load_dotenv
 from datetime import datetime
+from bson.objectid import ObjectId
 
 app = Flask(__name__, template_folder='templates')
 app.secret_key = 'mysecretkey'
@@ -26,8 +28,8 @@ def login():
         
         user = db_client.get_user(email)
         if user and check_password(password, user['pwd_hash']):
-            session['user_id'] = str(user['_id'])  # Guardar o ID do usuário na sessão
-            return redirect(url_for('home'))
+            session['user_id'] = str(user['_id']) # Guardar o ID do usuário na sessão
+            return redirect(url_for('user_page'))
         else:
             return redirect(url_for('login', message="Email ou senha incorretos."))
     
@@ -152,20 +154,132 @@ def resend_email_code():
 @app.route('/forgot_password', methods=['GET', 'POST'])
 def forgot_password():
     session.pop('user_id', None)
+    if request.method == 'POST':
+        email = request.form['email'].strip()
+        phone = request.form['telefone'].strip()
+
+        if not "@" in email or not "." in email:
+            print('Formato de email inválido')
+            return redirect(url_for('forgot_password', message='Formato de e-mail inválido.'))
+        
+        user = db_client.get_user(email)
+
+        if not user:
+            print('Usuário não cadastrado')
+            return redirect(url_for('forgot_password', message='Usuário não cadastrado'))
+        
+        if phone != user.get('phone'):
+            print('Numero de telefone incorreto com o cadastrado.')
+            return redirect(url_for('forgot_password', message='Número de telefone incorreto com o cadastrado.'))
+        fgt = ForgotPassword(email)
+        
+        is_email_sent, message, new_pwd = fgt.send_forgot_password_email()
+        if not is_email_sent:
+            print(message)
+            return redirect(url_for('forgot_password', message=message))
+        
+        new_pwd_hash = hash_password(new_pwd)
+        
+        db_client.update_user(email, {'pwd_hash': new_pwd_hash})
+        print('Nova senha cadastrada com sucesso.')
+        return redirect(url_for('login', message=message))
+
     return render_template('forgot_password.html')
 
 @app.route('/change_password', methods=['GET', 'POST'])
 def change_password():
+    if request.method == 'POST':
+        email = request.form['email'].strip()
+        old_password = request.form['senha_antiga'].strip()
+        new_password = request.form['nova_senha'].strip()
+        confirm_new_password = request.form['confirma_nova_senha'].strip()
+
+        if not "@" in email or not "." in email:
+            print('Formato de email inválido')
+            return redirect(url_for('change_password', message='Formato de e-mail inválido.'))
+        
+        user = db_client.get_user(email)
+        if not user:
+            print('Usuário não cadastrado')
+            return redirect(url_for('change_password', message='Usuário não cadastrado'))
+        
+        if not check_password(old_password, user.get('pwd_hash')):
+            print('Senha antiga incorreta')
+            return redirect(url_for('change_password', message='Senha antiga incorreta'))
+        
+        if new_password != confirm_new_password:
+            print('Nova senha e confirmação de nova senha não conferem')
+            return redirect(url_for('change_password', message='Nova senha e confirmação de nova senha não conferem'))
+        
+        register_validation = RegisterValidation(user.get('name'), email, new_password, confirm_new_password, user.get('phone'))
+
+        is_password_valid, message = register_validation.validate_password()
+        if not is_password_valid:
+            print(message)
+            return redirect(url_for('change_password', message=message))
+        
+        new_pwd_hash = hash_password(new_password)
+        
+        db_client.update_user(email, {'pwd_hash': new_pwd_hash})
+        print('Senha alterada com sucesso.')
+        return redirect(url_for('user_page', message='Senha alterada com sucesso'))
+
     return render_template('change_password.html')
 
-@app.route('/user_page')
+@app.route('/user_page', methods=['GET', 'POST'])
 def user_page():
-    return render_template('user_page.html')
+    if 'user_id' not in session:
+        print('Usuario nao logado')
+        return redirect(url_for('login', message='Faça login para acessar a página do usuário.'))
 
-@app.route('/new_checklist')
-def new_checklist():
-    return render_template('new_checklist.html')
+    user_id = session['user_id']
+    user = db_client.get_user_by_id(ObjectId(user_id))
+    user_name = user.get('name').split(' ')[0].capitalize()
+    checklists = db_client.get_user_checklist(user_id)
+    print(checklists)
 
-@app.route('/checklist')
+    return render_template('user_page.html', user_name=user_name, user_checklists=checklists)
+
+@app.route('/checklist', methods=['GET', 'POST'])
 def checklist():
-    return render_template('checklist.html')
+
+    if request.method == 'POST':
+        checklist_id = request.form['checklist_id']
+        
+        checklist = db_client.get_checklist_by_id(ObjectId(checklist_id))
+        print(checklist)
+        
+
+    return render_template('index.html')
+
+@app.route('/change_phone', methods=['GET', 'POST'])
+def change_phone():
+
+    if request.method == 'POST':
+        email = request.form['email'].strip()
+        old_number = request.form['telefone_antigo'].strip()
+        new_number = request.form['telefone_novo'].strip()
+        password = request.form['senha'].strip()
+
+        if not "@" in email or not "." in email:
+            print('Formato de email inválido')
+            return redirect(url_for('change_phone', message='Formato de e-mail inválido.'))
+        
+        user = db_client.get_user(email)
+        if not user:
+            print('Usuário não cadastrado')
+            return redirect(url_for('change_phone', message='Usuário não cadastrado'))
+        
+        if not check_password(password, user.get('pwd_hash')):
+            print('Senha incorreta')
+            return redirect(url_for('change_phone', message='Senha incorreta'))
+        
+        if user.get('phone') != old_number:
+            print('Telefone antigo incorreto')
+            return redirect(url_for('change_phone', message='Telefone antigo incorreto'))
+        
+        db_client.update_user(email, {'phone': new_number})
+        print('Telefone alterado com sucesso.')
+        return redirect(url_for('user_page', message='Telefone alterado com sucesso'))
+
+    return render_template('change_phone.html')
