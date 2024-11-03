@@ -58,16 +58,16 @@ footer {
   background-color: #0f66a0; /* Cor de fundo do footer */
   color: #ffffff; /* Cor do texto no footer */
   padding: 10px 0; /* Espaçamento interno do footer */
-  position: fixed;
-  bottom: 0;
   width: 100%;
+  z-index: 1000; /* Garantir que o footer tenha um z-index maior */
+  position: relative; /* Garantir que o footer seja posicionado corretamente */
 }
 
 /* Estilo para a sidebar */
 .sidebar {
   height: 100%;
   width: 250px;
-  position: fixed;
+  position: absolute; /* Alterar para absolute para que a sidebar mova junto com a tela */
   top: 0;
   left: 0;
   background-color: #f8f9fa;
@@ -77,6 +77,7 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 1; /* Garantir que a sidebar tenha um z-index menor */
 }
 
 .sidebar h4 {
@@ -127,7 +128,6 @@ footer {
   margin-top: 20px;
 }
 
-
 /* Estilo personalizado para os botões de checklist */
 .custom-button {
   background-color: #f8f9fa;
@@ -153,6 +153,11 @@ footer {
   margin: 0;
   text-decoration: none;
   flex-grow: 1;
+}
+
+/* Estilo para o estado selecionado */
+.custom-button.selected {
+  background-color: #d3d3d3; /* Cinza claro */
 }
 
 /* Adicionar espaço entre o ícone de rádio e o texto */

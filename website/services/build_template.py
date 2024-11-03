@@ -11,7 +11,7 @@ class BuildTemplate:
                     module = question.get('module')
                     if module not in template:
                         template[module] = []
-                        template[module].append({
+                    template[module].append({
                         question.get('description'): answer.get('answer'),
                         "notes": answer.get('notes'),
                         "glossary": question.get('glossary')

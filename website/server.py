@@ -254,11 +254,12 @@ def checklist():
         user_answers = checklist.get('answers')
 
         template = BuildTemplate.build(questions, user_answers)
+        print('Template finalizado:' + str(template))
 
         return render_template('checklist.html', template=template)
         
 
-    return render_template('checklist.html')
+    return render_template('checklist.html', template={})
 
 @app.route('/change_phone', methods=['GET', 'POST'])
 def change_phone():

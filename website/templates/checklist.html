@@ -51,7 +51,7 @@
 
  <!-- Content -->
  <header class="masthead">
-  <h1>CHECKLIST PAGE</h1>
+  <br>
   <div class="container mt-5">
     {% for module, questions in template.items() %}
     <div class="accordion" id="accordion{{ loop.index }}">
@@ -67,17 +67,17 @@
             <div class="mb-3">
               <label class="form-label"><strong>{{ question.keys() | list | first }}</strong></label>
               <p>
-                <br>
-                <input type="radio" name="answer_{{ loop.index }}" value="True" {% if question.values() | list | first == True %}checked{% endif %}> Sim
+                <input type="radio" name="answer_{{ loop.index }}" value="True" {% if question.values() | list | first == true %}checked{% endif %}> Sim
                 <span style="margin-right: 10px;"></span>
-                <input type="radio" name="answer_{{ loop.index }}" value="False" {% if question.values() | list | first == False %}checked{% endif %}> Não
+                <input type="radio" name="answer_{{ loop.index }}" value="False" {% if question.values() | list | first == false %}checked{% endif %}> Não
                 <span style="margin-right: 10px;"></span>
-                <input type="radio" name="answer_{{ loop.index }}" value="None" {% if question.values() | list | first == None %}checked{% endif %}> Não se aplica
+                <input type="radio" name="answer_{{ loop.index }}" value="None" {% if question.values() | list | first == none %}checked{% endif %}> Não se aplica
               </p>
               <p><em>Notes:</em></p>
               <textarea class="form-control" name="notes">{{ question['notes'] }}</textarea>
               <p><em>Glossary:</em> {{ question['glossary'] }}</p>
             </div>
+            <br> <!-- Quebra de linha extra -->
             {% endfor %}
           </div>
         </div>
@@ -89,21 +89,6 @@
     <button type="button" class="btn btn-success">Salvar</button>
   </div>
 </header>
-
-
-  <!-- Footer -->
-  <footer class="py-5 bg-dark">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 text-center text-white">
-          <p class="m-0">
-            Copyright &copy; <a href="https://fatecmm.cps.sp.gov.br/" class="text-white">Fatec Arthur de
-              Azevedo</a> 2024
-          </p>
-        </div>
-      </div>
-    </div>
-  </footer>
 
   <script src="../static/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
