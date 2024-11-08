@@ -244,13 +244,14 @@ def user_page():
 @app.route('/checklist', methods=['GET', 'POST'])
 def checklist():
 
+    questions = db_client.get_questions()
+
     if request.method == 'POST':
         checklist_id = request.form['checklist_id']
         
         checklist = db_client.get_checklist_by_id(ObjectId(checklist_id))
         print(checklist)
 
-        questions = db_client.get_questions()
         user_answers = checklist.get('answers')
 
         template = BuildTemplate.build(questions, user_answers)
@@ -258,8 +259,9 @@ def checklist():
 
         return render_template('checklist.html', template=template)
         
-
-    return render_template('checklist.html', template={})
+    template = BuildTemplate.build(questions)
+    print('Template usuário nao logado finalizado:' + str(template))
+    return render_template('checklist.html', template=template)
 
 @app.route('/change_phone', methods=['GET', 'POST'])
 def change_phone():
@@ -292,3 +294,12 @@ def change_phone():
         return redirect(url_for('user_page', message='Telefone alterado com sucesso'))
 
     return render_template('change_phone.html')
+
+@app.route('/delete_checklist', methods=['POST'])
+def delete_checklist():
+    if request.method == 'POST':
+        checklist_id = request.form['checklist_id']
+        db_client.db.userChecklist.delete_one({"_id": ObjectId(checklist_id)})
+        return redirect(url_for('user_page', message='Checklist deletado com sucesso.'))
+
+    return redirect(url_for('user_page', message='Erro ao deletar checklist.'))

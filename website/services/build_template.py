@@ -1,6 +1,6 @@
 class BuildTemplate:
 
-    def build(questions, answers):
+    def build(questions, answers=None):
         template = {}
         answer_dict = {str(answer.get('question')).strip(): answer for answer in answers}
         

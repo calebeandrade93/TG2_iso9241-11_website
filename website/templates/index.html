@@ -16,7 +16,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="{{url_for('home')}}">TelaAudit - Checklist de Usabilidade</a>
+      <a class="navbar-brand" href="{{ url_for('home') }}">TelaAudit - Checklist de Usabilidade</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
         aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -24,24 +24,21 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="{{url_for('home')}}">Home</a>
+            <a class="nav-link" href="{{ url_for('home') }}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Checklist</a>
+            <a class="nav-link" href="{{ url_for('user_page') }}">Meu perfil</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Contato</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{url_for('user_page')}}">Meu perfil</a>
-          </li>
           {% if 'user_id' in session %}
           <li class="nav-item">
-            <a class="nav-link" href="{{url_for('logout')}}">Logout</a>
+            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
           </li>
           {% else %}
           <li class="nav-item">
-            <a class="nav-link" href="{{url_for('login')}}">Login</a>
+            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
           </li>
           {% endif %}
         </ul>
@@ -68,29 +65,12 @@
             <a href="{{url_for('login')}}">Faça o Login</a>
           </div>
           <div class="bottom-homepage">
-            <a href="">Novo checklist</a>
-          </div>
-          <div class="bottom-homepage">
             <a href="{{url_for('register')}}">Registrar</a>
           </div>
         </div>
       </div>
     </div>
   </header>
-
-  <!-- Footer-->
-  <footer class="py-5 bg-dark">
-    <div class="container">
-      <div class="row">
-        <!-- Texto centralizado -->
-        <div class="col-md-12 text-center text-white">
-          <p class="m-0">
-            Copyright &copy; <a href="https://fatecmm.cps.sp.gov.br/" class="text-white">Fatec Arthur de Azevedo</a> 2024
-          </p>
-        </div>
-      </div>
-    </div>
-  </footer>
   
   <script src="../static/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="../static/script.js"></script>

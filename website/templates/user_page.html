@@ -9,11 +9,6 @@
     <link rel="icon" href="../static/asset/cps.jpg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Painel do Usuário - TelaAudit</title>
-    <script>
-      function confirmDelete() {
-        return confirm('Você tem certeza que deseja excluir este checklist?');
-      }
-    </script>
 </head>
 
 <body>
@@ -32,13 +27,10 @@
             <a class="nav-link" href="{{ url_for('home') }}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Checklist</a>
+            <a class="nav-link" href="{{ url_for('user_page') }}">Meu perfil</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Contato</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('user_page') }}">Meu perfil</a>
           </li>
           {% if 'user_id' in session %}
           <li class="nav-item">
@@ -83,7 +75,7 @@
               <button type="submit" formaction="{{ url_for('checklist') }}" class="btn btn-primary">Exportar Checklist</button>
               <a href="{{ url_for('checklist') }}" class="btn btn-success">Novo Checklist</a>
               <button type="submit" formaction="{{ url_for('checklist') }}" class="btn btn-warning">Editar Checklist</button>
-              <button type="submit" formaction="{{ url_for('checklist') }}" class="btn btn-danger" onclick="return confirmDelete()">Deletar Checklist</button>
+              <button type="submit" formaction="{{ url_for('delete_checklist') }}" class="btn btn-danger" onclick="return confirmDelete()">Deletar Checklist</button>
             </div>
           </form>
         </div>
@@ -91,21 +83,12 @@
     </div>
   </header>
 
-  <!-- Footer -->
-  <footer class="py-5 bg-dark">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 text-center text-white">
-          <p class="m-0">
-            Copyright &copy; <a href="https://fatecmm.cps.sp.gov.br/" class="text-white">Fatec Arthur de
-              Azevedo</a> 2024
-          </p>
-        </div>
-      </div>
-    </div>
-  </footer>
-
   <script src="../static/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function confirmDelete() {
+      return confirm('Você tem certeza que deseja excluir este checklist?');
+    }
+  </script>
 </body>
 
 </html>

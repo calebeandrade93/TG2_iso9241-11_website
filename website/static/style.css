@@ -53,16 +53,6 @@ div.content {
   background-color: #b5b8bb;
 }
 
-/* Estilo para o footer */
-footer {
-  background-color: #0f66a0; /* Cor de fundo do footer */
-  color: #ffffff; /* Cor do texto no footer */
-  padding: 10px 0; /* Espaçamento interno do footer */
-  width: 100%;
-  z-index: 1000; /* Garantir que o footer tenha um z-index maior */
-  position: relative; /* Garantir que o footer seja posicionado corretamente */
-}
-
 /* Estilo para a sidebar */
 .sidebar {
   height: 100%;
@@ -163,4 +153,8 @@ footer {
 /* Adicionar espaço entre o ícone de rádio e o texto */
 .custom-button input[type="radio"] {
   margin-right: 10px;
+}
+
+body {
+  background-color: #e2e2e2; /* Cor de fundo cinza para toda a página */
 }

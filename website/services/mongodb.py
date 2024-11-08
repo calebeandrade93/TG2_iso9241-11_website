@@ -35,5 +35,8 @@ class Mongodb:
         questions = self.db.question.find()
         return list(questions)
     
+    def delete_checklist(self, checklist_id):
+        self.db.userChecklist.delete_one({"_id": checklist_id})
+        
 
         
