@@ -50,42 +50,42 @@
  <header class="masthead">
   <br>
   <div class="container mt-5">
-    {% for module, questions in template.items() %}
-    <div class="accordion" id="accordion{{ loop.index }}">
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="heading{{ loop.index }}">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}" aria-expanded="true" aria-controls="collapse{{ loop.index }}">
-            {{ module }}
-          </button>
-        </h2>
-        <div id="collapse{{ loop.index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ loop.index }}" data-bs-parent="#accordion{{ loop.index }}">
-          <div class="accordion-body">
-            {% for question in questions %}
-            <div class="mb-3">
-              <label class="form-label"><strong>{{ question.keys() | list | first }}</strong></label>
-              <p>
-                <input type="radio" name="answer_{{ loop.index }}" value="True" {% if question.values() | list | first == true %}checked{% endif %}> Sim
-                <span style="margin-right: 10px;"></span>
-                <input type="radio" name="answer_{{ loop.index }}" value="False" {% if question.values() | list | first == false %}checked{% endif %}> Não
-                <span style="margin-right: 10px;"></span>
-                <input type="radio" name="answer_{{ loop.index }}" value="None" {% if question.values() | list | first == none %}checked{% endif %}> Não se aplica
-              </p>
-              <p><em>Notes:</em></p>
-              <textarea class="form-control" name="notes">{{ question['notes'] }}</textarea>
-              <p><em>Glossary:</em> {{ question['glossary'] }}</p>
+    <form id="checklistForm" method="POST" action="{{ url_for('save_checklist') }}">
+      {% for module, questions in template.items() %}
+      <div class="accordion" id="accordion{{ loop.index }}">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="heading{{ loop.index }}">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}" aria-expanded="true" aria-controls="collapse{{ loop.index }}">
+              {{ module }}
+            </button>
+          </h2>
+          <div id="collapse{{ loop.index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ loop.index }}" data-bs-parent="#accordion{{ loop.index }}">
+            <div class="accordion-body">
+              {% for question in questions %}
+              <div class="mb-3">
+                <label class="form-label"><strong>{{ question.keys() | list | first }}</strong></label>
+                <p>
+                  <input type="radio" name="answer_{{ loop.index }}_{{ loop.index0 }}" value="True" {% if question.values() | list | first == true %}checked{% endif %}> Sim
+                  <span style="margin-right: 10px;"></span>
+                  <input type="radio" name="answer_{{ loop.index }}_{{ loop.index0 }}" value="False" {% if question.values() | list | first == false %}checked{% endif %}> Não
+                  <span style="margin-right: 10px;"></span>
+                  <input type="radio" name="answer_{{ loop.index }}_{{ loop.index0 }}" value="None" {% if question.values() | list | first == none %}checked{% endif %}> Não se aplica
+                </p>
+                <p><em>Notes:</em></p>
+                <textarea class="form-control" name="notes_{{ loop.index }}_{{ loop.index0 }}">{{ question['notes'] }}</textarea>
+                <p><em>Glossary:</em> {{ question['glossary'] }}</p>
+              </div>
+              <br> <!-- Quebra de linha extra -->
+              {% endfor %}
             </div>
-            <br> <!-- Quebra de linha extra -->
-            {% endfor %}
           </div>
         </div>
       </div>
-    </div>
-    {% endfor %}
-  </div>
-  <div class="buttons mt-3 text-center">
-    {% if 'user_id' in session %}
-    <button type="button" class="btn btn-success mx-2">Salvar</button>
-    {% endif %}
+      {% endfor %}
+      <div class="buttons mt-3 text-center">
+        {% if 'user_id' in session %}
+        <button type="submit" class="btn btn-success mx-2">Salvar</button>
+        {% endif %}
     <button type="button" class="btn btn-danger mx-2" onclick="cancel()">Cancelar</button>
   </div>
 </header>

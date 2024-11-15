@@ -2,8 +2,11 @@ class BuildTemplate:
 
     def build(questions, answers=None):
         template = {}
-        answer_dict = {str(answer.get('question')).strip(): answer for answer in answers}
-        
+        answer_dict = {}
+
+        if answers:
+            answer_dict = {str(answer.get('question')).strip(): answer for answer in answers}
+             
         for question in questions:
             question_id = str(question.get('_id')).strip()
             module = question.get('module')

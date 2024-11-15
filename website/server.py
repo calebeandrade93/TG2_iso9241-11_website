@@ -13,7 +13,7 @@ from bson.objectid import ObjectId
 
 app = Flask(__name__, template_folder='templates')
 app.secret_key = 'mysecretkey'
-app.config['SESSION_PERMANENT'] = False  # Define a sessão como não permanente
+app.config['SESSION_PERMANENT'] = False  
 db_client = Mongodb()
 load_dotenv()
 
@@ -253,6 +253,7 @@ def checklist():
         print(checklist)
 
         user_answers = checklist.get('answers')
+        checklist_id = checklist.get('_id')
 
         template = BuildTemplate.build(questions, user_answers)
         print('Template finalizado:' + str(template))
@@ -303,3 +304,17 @@ def delete_checklist():
         return redirect(url_for('user_page', message='Checklist deletado com sucesso.'))
 
     return redirect(url_for('user_page', message='Erro ao deletar checklist.'))
+
+@app.route('/save_checklist', methods=['POST'])
+def save_checklist():
+    if request.method == 'POST':
+        user_id = session.get('user_id')
+        if not user_id:
+            return redirect(url_for('login', message='Por favor, faça login para salvar o checklist.'))
+
+        # Aqui você pode adicionar a lógica para salvar o checklist no banco de dados
+        # save_checklist_data(form_data, user_id)
+
+        return redirect(url_for('user_page', message='Checklist salvo com sucesso.'))
+
+    return redirect(url_for('user_page', message='Erro ao salvar checklist.'))
