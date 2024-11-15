@@ -245,7 +245,6 @@ def user_page():
 def checklist():
 
     questions = db_client.get_questions()
-    print("!!!!!!!!!!!!!!!!!!!!!!QUESTIONS: " + str(questions))
 
     if request.method == 'POST':
         checklist_id = request.form['checklist_id']
@@ -315,13 +314,14 @@ def save_checklist():
         
         checklist_id = request.form.get('checklist_id')
         form_data = request.form.to_dict()
-        
-        print("!!!!!!!!FORM DATA PREVIEW!!!!!!!!: "+ str(form_data))
+        answers = BuildTemplate.build_to_save(form_data)
+        updated_at = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        updates = {
+            "answers": answers, 
+            "updated_at": updated_at
+        }
 
-        template_to_save = []
-        # Aqui você pode adicionar a lógica para salvar o checklist no banco de dados
-        # save_checklist_data(form_data, user_id)
-
-        return redirect(url_for('user_page', message='Checklist salvo com sucesso.'))
+        db_client.update_user_checklist(ObjectId(checklist_id), updates)
+        return redirect(url_for('user_page', message='Checklist atualizado com sucesso.'))
 
     return redirect(url_for('user_page', message='Erro ao salvar checklist.'))

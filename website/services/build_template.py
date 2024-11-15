@@ -31,5 +31,28 @@ class BuildTemplate:
         
         return template
     
-    def build_to_save():
-        pass
+    def build_to_save(form_data):
+        answers = []
+        for key, value in form_data.items():
+            if key.startswith("answer_") or key.startswith("notes_"):
+                parts = key.split('_')
+                question_id = parts[1]
+                field = parts[0]
+
+                # Procurar a questão pelo ID
+                question_data = next((item for item in answers if item["question"] == question_id), None)
+                if not question_data:
+                    question_data = {"question": question_id, "answer": None, "notes": ""}
+                    answers.append(question_data)
+
+                if field == "answer":
+                    if value == "True":
+                        question_data["answer"] = True
+                    elif value == "False":
+                        question_data["answer"] = False
+                    elif value == "None":
+                        question_data["answer"] = None
+                elif field == "notes":
+                    question_data["notes"] = value
+
+        return answers

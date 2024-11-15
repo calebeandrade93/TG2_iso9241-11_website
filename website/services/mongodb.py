@@ -23,6 +23,9 @@ class Mongodb:
     def update_user(self, email, updates):
         self.db.userData.update_one({"email": email}, {"$set": updates})
     
+    def update_user_checklist(self, checklist_id, updates):
+        self.db.userChecklist.update_one({"_id": checklist_id}, {"$set": updates})
+    
     def get_user_checklist(self, user_id):
         checklists = self.db.userChecklist.find({"user": user_id})
         return list(checklists)
