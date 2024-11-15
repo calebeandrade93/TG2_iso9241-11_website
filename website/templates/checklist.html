@@ -51,6 +51,7 @@
   <br>
   <div class="container mt-5">
     <form id="checklistForm" method="POST" action="{{ url_for('save_checklist') }}">
+      <input type="hidden" name="checklist_id" value="{{ checklist_id }}">
       {% for module_index, (module, questions) in enumerate(template.items()) %}
       <div class="accordion" id="accordion{{ module_index }}">
         <div class="accordion-item">
@@ -65,14 +66,14 @@
               <div class="mb-3">
                 <label class="form-label"><strong>{{ question.keys() | list | first }}</strong></label>
                 <p>
-                  <input type="radio" name="answer_{{ module_index }}_{{ question_index }}" value="True" {% if question.values() | list | first == true %}checked{% endif %}> Sim
+                  <input type="radio" name="answer_{{ question['question_id'] }}" value="True" {% if question.values() | list | first == true %}checked{% endif %}> Sim
                   <span style="margin-right: 10px;"></span>
-                  <input type="radio" name="answer_{{ module_index }}_{{ question_index }}" value="False" {% if question.values() | list | first == false %}checked{% endif %}> Não
+                  <input type="radio" name="answer_{{ question['question_id'] }}" value="False" {% if question.values() | list | first == false %}checked{% endif %}> Não
                   <span style="margin-right: 10px;"></span>
-                  <input type="radio" name="answer_{{ module_index }}_{{ question_index }}" value="None" {% if question.values() | list | first == none %}checked{% endif %}> Não se aplica
+                  <input type="radio" name="answer_{{ question['question_id'] }}" value="None" {% if question.values() | list | first == none %}checked{% endif %}> Não se aplica
                 </p>
                 <p><em>Notes:</em></p>
-                <textarea class="form-control" name="notes_{{ module_index }}_{{ question_index }}">{{ question['notes'] }}</textarea>
+                <textarea class="form-control" name="notes_{{ question['question_id'] }}">{{ question['notes'] }}</textarea>
                 <p><em>Glossary:</em> {{ question['glossary'] }}</p>
               </div>
               <br> <!-- Quebra de linha extra -->

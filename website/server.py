@@ -245,6 +245,7 @@ def user_page():
 def checklist():
 
     questions = db_client.get_questions()
+    print("!!!!!!!!!!!!!!!!!!!!!!QUESTIONS: " + str(questions))
 
     if request.method == 'POST':
         checklist_id = request.form['checklist_id']
@@ -255,10 +256,10 @@ def checklist():
         user_answers = checklist.get('answers')
         checklist_id = checklist.get('_id')
 
-        template = BuildTemplate.build(questions, user_answers)
+        template = BuildTemplate.build_for_front(questions, user_answers)
         print('Template finalizado:' + str(template))
 
-        return render_template('checklist.html', template=template, enumerate=enumerate)
+        return render_template('checklist.html', template=template, enumerate=enumerate, checklist_id=checklist_id)
         
     template = BuildTemplate.build(questions)
     print('Template usuário nao logado finalizado:' + str(template))
@@ -311,7 +312,13 @@ def save_checklist():
         user_id = session.get('user_id')
         if not user_id:
             return redirect(url_for('login', message='Por favor, faça login para salvar o checklist.'))
+        
+        checklist_id = request.form.get('checklist_id')
+        form_data = request.form.to_dict()
+        
+        print("!!!!!!!!FORM DATA PREVIEW!!!!!!!!: "+ str(form_data))
 
+        template_to_save = []
         # Aqui você pode adicionar a lógica para salvar o checklist no banco de dados
         # save_checklist_data(form_data, user_id)
 

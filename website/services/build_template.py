@@ -1,6 +1,6 @@
 class BuildTemplate:
 
-    def build(questions, answers=None):
+    def build_for_front(questions, answers=None):
         template = {}
         answer_dict = {}
 
@@ -18,13 +18,18 @@ class BuildTemplate:
                 template[module].append({
                     question.get('description'): answer.get('answer'),
                     "notes": answer.get('notes'),
-                    "glossary": question.get('glossary')
+                    "glossary": question.get('glossary'),
+                    "question_id": question_id
                 })
             else:
                 template[module].append({
                     question.get('description'): None,
                     "notes": "",
-                    "glossary": question.get('glossary')
+                    "glossary": question.get('glossary'),
+                    "question_id": question_id
                 })
         
         return template
+    
+    def build_to_save():
+        pass
