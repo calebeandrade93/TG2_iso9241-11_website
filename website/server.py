@@ -258,7 +258,7 @@ def checklist():
         template = BuildTemplate.build(questions, user_answers)
         print('Template finalizado:' + str(template))
 
-        return render_template('checklist.html', template=template)
+        return render_template('checklist.html', template=template, enumerate=enumerate)
         
     template = BuildTemplate.build(questions)
     print('Template usuário nao logado finalizado:' + str(template))
