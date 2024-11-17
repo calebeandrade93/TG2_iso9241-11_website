@@ -1,6 +1,5 @@
-import os
-
-from flask import Flask, request, render_template, redirect, url_for, session
+import io
+from flask import Flask, request, render_template, redirect, url_for, session, send_file
 from services.register_validation import RegisterValidation
 from services.retry_email import RetryEmail
 from services.mongodb import Mongodb 
@@ -216,7 +215,6 @@ def change_password():
 
         is_password_valid, message = register_validation.validate_password()
         if not is_password_valid:
-            print(message)
             return redirect(url_for('change_password', message=message))
         
         new_pwd_hash = hash_password(new_password)
@@ -237,7 +235,6 @@ def user_page():
     user = db_client.get_user_by_id(ObjectId(user_id))
     user_name = user.get('name').split(' ')[0].capitalize()
     checklists = db_client.get_user_checklist(user_id)
-    print(checklists)
 
     return render_template('user_page.html', user_name=user_name, user_checklists=checklists)
 
@@ -260,8 +257,6 @@ def checklist():
 
         return render_template('checklist.html', template=template, enumerate=enumerate, checklist_id=checklist_id)
         
-    template = BuildTemplate.build(questions)
-    print('Template usuário nao logado finalizado:' + str(template))
     return render_template('checklist.html', template=template)
 
 @app.route('/change_phone', methods=['GET', 'POST'])
@@ -325,3 +320,69 @@ def save_checklist():
         return redirect(url_for('user_page', message='Checklist atualizado com sucesso.'))
 
     return redirect(url_for('user_page', message='Erro ao salvar checklist.'))
+
+@app.route('/new_checklist', methods=['POST'])
+def new_checklist():
+    if request.method == 'POST':
+        user_id = session.get('user_id')
+        if not user_id:
+            return redirect(url_for('login', message='Por favor, faça login para criar um novo checklist.'))
+
+        checklist_name = request.form.get('checklist_name')
+        if not checklist_name:
+            return redirect(url_for('user_page', message='Nome do checklist não pode estar vazio.'))
+
+        # Criar um novo checklist
+        new_checklist = {
+            "user": user_id,
+            "name": checklist_name,
+            "answers": [],
+            "created_at": datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+            "updated_at": datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        }
+
+        db_client.db.userChecklist.insert_one(new_checklist)
+
+        return redirect(url_for('user_page', message='Novo checklist criado com sucesso.'))
+
+    return redirect(url_for('user_page', message='Erro ao criar novo checklist.'))
+
+@app.route('/export_checklist', methods=['POST'])
+def export_checklist():
+    if request.method == 'POST':
+        checklist_id = request.form.get('checklist_id')
+        checklist = db_client.get_checklist_by_id(ObjectId(checklist_id))
+        questions = db_client.get_questions()
+        user_answers = checklist.get('answers')
+
+        template = BuildTemplate.build_for_front(questions, user_answers)
+
+        pdf_content = BuildTemplate.build_pdf(template, 
+                                                checklist.get('name'), 
+                                                checklist.get('created_at'), 
+                                                checklist.get('updated_at')
+                                             )
+        
+        return send_file(
+            io.BytesIO(pdf_content),
+            mimetype='application/pdf',
+            as_attachment=True,
+            download_name='checklist.pdf'
+        )
+
+    return redirect(url_for('user_page', message='Erro ao exportar checklist.'))
+
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    if request.method == 'POST':
+        name = request.form['nome'].strip()
+        email = request.form['email'].strip()
+        message = request.form['mensagem'].strip()
+
+        if not "@" in email or not "." in email:
+            print('Formato de email inválido')
+            return redirect(url_for('contact', message='Formato de e-mail inválido.'))
+
+        return redirect(url_for('home', message='E-mail enviado para o suporte.'))
+
+    return render_template('contact.html')        

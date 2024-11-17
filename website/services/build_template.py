@@ -1,3 +1,5 @@
+from fpdf import FPDF
+
 class BuildTemplate:
 
     def build_for_front(questions, answers=None):
@@ -23,7 +25,7 @@ class BuildTemplate:
                 })
             else:
                 template[module].append({
-                    question.get('description'): None,
+                    question.get('description'): "",
                     "notes": "",
                     "glossary": question.get('glossary'),
                     "question_id": question_id
@@ -56,3 +58,36 @@ class BuildTemplate:
                     question_data["notes"] = value
 
         return answers
+    
+    def build_pdf(template, name, created_at, updated_at):
+        pdf = FPDF()
+        pdf.add_page()
+        pdf.set_font("Arial", size=12)
+
+        # Adicionar título e informações do checklist
+        pdf.set_font("Arial", 'B', size=16)
+        pdf.cell(200, 10, txt=name, ln=True, align='C')
+        pdf.set_font("Arial", size=12)
+        pdf.cell(200, 10, txt=f"Data de criação: {created_at}", ln=True, align='L')
+        pdf.cell(200, 10, txt=f"Data de atualização: {updated_at}", ln=True, align='L')
+        pdf.ln(10)
+
+        # Adicionar módulos e perguntas
+        for module, questions in template.items():
+            pdf.set_font("Arial", 'B', size=14)
+            pdf.cell(200, 10, txt=module, ln=True, align='L')
+            pdf.set_font("Arial", size=12)
+            for question in questions:
+                question_text = list(question.keys())[0]
+                answer = question.get('answer', '')
+                notes = question.get('notes', '')
+                glossary = question.get('glossary', '')
+                pdf.cell(200, 10, txt=f"P: {question_text}", ln=True, align='L')
+                pdf.cell(200, 10, txt=f"R: {answer}", ln=True, align='L')
+                pdf.cell(200, 10, txt=f"Anotações: {notes}", ln=True, align='L')
+                pdf.cell(200, 10, txt=f"Glossário: {glossary}", ln=True, align='L')
+                pdf.ln(5)
+
+        return pdf.output(dest='S').encode('latin1')
+
+        

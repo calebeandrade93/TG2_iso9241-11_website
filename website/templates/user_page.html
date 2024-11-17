@@ -2,49 +2,56 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/style.css">
-    <link rel="icon" href="../static/asset/cps.jpg">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Painel do Usuário - TelaAudit</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/style.css">
+  <link rel="icon" href="../static/asset/cps.jpg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>TelaAudit - Fatec Arthur de Azevedo</title>
+  <script type="text/javascript">
+    function redirectToHome() {
+        window.location.href = "{{ url_for('home') }}";
+    }
+</script>
 </head>
+
 
 <body>
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="{{ url_for('home') }}">TelaAudit - Checklist de Usabilidade</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="{{ url_for('home') }}">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('user_page') }}">Meu perfil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contato</a>
-          </li>
-          {% if 'user_id' in session %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
-          </li>
-          {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
-          </li>
-          {% endif %}
-        </ul>
-      </div>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="{{ url_for('home') }}">TelaAudit - Checklist de Usabilidade</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('user_page') }}">Meu perfil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('contact') }}">Contato</a>
+        </li>
+        {% if 'user_id' in session %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+        </li>
+        {% endif %}
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
+
 
   <!-- Sidebar -->
   <div class="sidebar d-flex flex-column justify-content-center align-items-center">
@@ -63,18 +70,18 @@
           <form id="checklist-form" method="POST" action="">
             <div class="row checklist-container">
               {% for checklist in user_checklists %}
-              <div class="col-md-4">
-                <div class="checklist-box custom-button">
+              <div class="col-md-4 d-flex align-items-stretch">
+                <div class="checklist-box custom-button w-100">
                   <input type="radio" name="checklist_id" value="{{ checklist._id }}">
                   <h5>{{ checklist.name }}</h5>
                 </div>
               </div>
               {% endfor %}
             </div>
-            <div class="buttons">
-              <a href="{{ url_for('checklist') }}" class="btn btn-success">Novo Checklist</a>
+            <div class="buttons mt-3">
+              <button type="button" id="newChecklistButton" class="btn btn-success">Novo Checklist</button>
               <button type="submit" formaction="{{ url_for('checklist') }}" class="btn btn-warning">Editar Checklist</button>
-              <button type="submit" formaction="{{ url_for('checklist') }}" class="btn btn-primary">Exportar Checklist</button>
+              <button type="submit" formaction="{{ url_for('export_checklist') }}" class="btn btn-primary">Exportar Checklist</button>
               <button type="submit" formaction="{{ url_for('delete_checklist') }}" class="btn btn-danger" onclick="return confirmDelete()">Deletar Checklist</button>
             </div>
           </form>
@@ -88,6 +95,20 @@
     function confirmDelete() {
       return confirm('Você tem certeza que deseja excluir este checklist?');
     }
+
+    document.getElementById('newChecklistButton').addEventListener('click', function() {
+      var checklistName = prompt("Por favor, insira o nome do novo checklist:");
+      if (checklistName) {
+        var form = document.getElementById('checklist-form');
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'checklist_name';
+        input.value = checklistName;
+        form.appendChild(input);
+        form.action = "{{ url_for('new_checklist') }}";
+        form.submit();
+      }
+    });
   </script>
 </body>
 
