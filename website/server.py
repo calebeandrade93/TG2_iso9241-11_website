@@ -1,5 +1,5 @@
 import io
-from flask import Flask, request, render_template, redirect, url_for, session, send_file
+from flask import Flask, request, render_template, redirect, url_for, flash, session, send_file
 from services.register_validation import RegisterValidation
 from services.retry_email import RetryEmail
 from services.mongodb import Mongodb 
@@ -31,7 +31,8 @@ def login():
             session['user_id'] = str(user['_id']) # Guardar o ID do usuário na sessão
             return redirect(url_for('user_page'))
         else:
-            return redirect(url_for('login', message="Email ou senha incorretos."))
+            flash('Email ou senha incorretos.', 'danger')
+            return redirect(url_for('login'))
     
     return render_template('login.html')
 
@@ -51,26 +52,28 @@ def register():
         phone = request.form['telefone'].strip()
 
         if not "@" in email or not "." in email:
-            return redirect(url_for('register', message='Formato de e-mail inválido.'))
+            flash('Formato de email inválido', 'danger')
+            return redirect(url_for('register'))
+            
         
         is_user_registered = db_client.get_user(email)
         if is_user_registered:
-            print('Usuário já cadastrado')
-            return redirect(url_for('login', message='Usuário já cadastrado'))
+            flash('Usuário já cadastrado', 'danger')
+            return redirect(url_for('login'))
 
         register_validation = RegisterValidation(name, email, password, confirm_password, phone)
 
         is_password_valid, message = register_validation.validate_password()
         if not is_password_valid:
-            print(message)
-            return redirect(url_for('register', message=message))
+            flash(message, 'danger')
+            return redirect(url_for('register'))
         
         hashed_password = hash_password(password)
 
         is_email, message, email_code = register_validation.validate_email()
         if not is_email:
-            print(message)
-            return redirect(url_for('register', message=message))
+            flash(message, 'danger')
+            return redirect(url_for('register'))
 
         user = {
             "name": name,
@@ -84,8 +87,8 @@ def register():
         
         db_client.insert_user(user)
 
-        print(message)
-        return redirect(url_for('verify_email', message=message))
+        flash(message, 'success')
+        return redirect(url_for('verify_email'))
 
     return render_template('register.html')
 
@@ -97,25 +100,25 @@ def verify_email():
         email_code = request.form['email_code'].strip()
 
         if not "@" in email or not "." in email:
-            print('Formato de email inválido')
-            return redirect(url_for('verify_email', message='Formato de e-mail inválido.'))
+            flash('Formato de email inválido', 'danger')
+            return redirect(url_for('verify_email'))
 
         is_user_registered = db_client.get_user(email)
         if not is_user_registered:
-            print('Usuário não cadastrado')
-            return redirect(url_for('register', message='Usuário não cadastrado'))
+            flash('Usuário não cadastrado', 'danger')
+            return redirect(url_for('register'))
         
         if email_code != is_user_registered.get('email_code'):
-            print('Código de verificação incorreto')
-            return redirect(url_for('verify_email', message='Código de verificação incorreto'))
+            flash('Código de verificação incorreto', 'danger')
+            return redirect(url_for('verify_email'))
         
         if is_user_registered.get('is_verified'):
-            print('Email já verificado')
-            return redirect(url_for('login', message='Email já verificado'))
+            flash('Email já verificado', 'danger')
+            return redirect(url_for('login'))
         
         db_client.update_user(email, {'is_verified': True})
-        print('Email verificado com sucesso')
-        return redirect(url_for('login', message='Email verificado com sucesso'))
+        flash('Email verificado com sucesso', 'success')
+        return redirect(url_for('login'))
 
     return render_template('verify_email.html')
 
@@ -127,27 +130,27 @@ def resend_email_code():
         is_user_registered = db_client.get_user(email)
 
         if not "@" in email or not "." in email:
-            print('formato invalido de email')
-            return redirect(url_for('verify_email', message='Formato de e-mail inválido.'))
+            flash('Formato de email inválido', 'danger')
+            return redirect(url_for('verify_email'))
 
         if not is_user_registered:
-            print('Usuário não cadastrado')
-            return redirect(url_for('register', message='Usuário não cadastrado'))
+            flash('Usuário não cadastrado', 'danger')
+            return redirect(url_for('register'))
         
         if is_user_registered.get('is_verified'):
-            print('Email já verificado')
-            return redirect(url_for('login', message='Email já verificado'))
+            flash('Email já verificado', 'danger')
+            return redirect(url_for('login'))
         
         retry = RetryEmail(email)
         email_code = retry.email_code
         is_email_sent, message = retry.send_retry_email()
         if not is_email_sent:
-            print(message)
-            return redirect(url_for('resend_email_code', message=message))
+            flash(message, 'danger')
+            return redirect(url_for('resend_email_code'))
         
         db_client.update_user(email, {'email_code': email_code})
-        print('Código de verificação reenviado com sucesso')
-        return redirect(url_for('verify_email', message='Código de verificação reenviado com sucesso'))
+        flash('Código de verificação reenviado com sucesso', 'success')
+        return redirect(url_for('verify_email'))
 
     return render_template('resend_email.html')
 
@@ -159,30 +162,30 @@ def forgot_password():
         phone = request.form['telefone'].strip()
 
         if not "@" in email or not "." in email:
-            print('Formato de email inválido')
-            return redirect(url_for('forgot_password', message='Formato de e-mail inválido.'))
+            flash('Formato de email inválido', 'danger')
+            return redirect(url_for('forgot_password'))
         
         user = db_client.get_user(email)
 
         if not user:
-            print('Usuário não cadastrado')
-            return redirect(url_for('forgot_password', message='Usuário não cadastrado'))
+            flash('Usuário não cadastrado', 'danger')
+            return redirect(url_for('forgot_password'))
         
         if phone != user.get('phone'):
-            print('Numero de telefone incorreto com o cadastrado.')
-            return redirect(url_for('forgot_password', message='Número de telefone incorreto com o cadastrado.'))
+            flash('Número de telefone incorreto com o cadastrado', 'danger')
+            return redirect(url_for('forgot_password'))
         fgt = ForgotPassword(email)
         
         is_email_sent, message, new_pwd = fgt.send_forgot_password_email()
         if not is_email_sent:
-            print(message)
-            return redirect(url_for('forgot_password', message=message))
+            flash(message, 'danger')
+            return redirect(url_for('forgot_password'))
         
         new_pwd_hash = hash_password(new_pwd)
         
         db_client.update_user(email, {'pwd_hash': new_pwd_hash})
-        print('Nova senha cadastrada com sucesso.')
-        return redirect(url_for('login', message=message))
+        flash(message, 'success')
+        return redirect(url_for('login'))
 
     return render_template('forgot_password.html')
 
@@ -195,41 +198,42 @@ def change_password():
         confirm_new_password = request.form['confirma_nova_senha'].strip()
 
         if not "@" in email or not "." in email:
-            print('Formato de email inválido')
-            return redirect(url_for('change_password', message='Formato de e-mail inválido.'))
+            flash('Formato de email inválido', 'danger')
+            return redirect(url_for('change_password'))
         
         user = db_client.get_user(email)
         if not user:
-            print('Usuário não cadastrado')
-            return redirect(url_for('change_password', message='Usuário não cadastrado'))
+            flash('Usuário não cadastrado', 'danger')
+            return redirect(url_for('change_password'))
         
         if not check_password(old_password, user.get('pwd_hash')):
-            print('Senha antiga incorreta')
-            return redirect(url_for('change_password', message='Senha antiga incorreta'))
+            flash('Senha antiga incorreta', 'danger')
+            return redirect(url_for('change_password'))
         
         if new_password != confirm_new_password:
-            print('Nova senha e confirmação de nova senha não conferem')
-            return redirect(url_for('change_password', message='Nova senha e confirmação de nova senha não conferem'))
+            flash('Nova senha e confirmação de nova senha não conferem', 'danger')
+            return redirect(url_for('change_password'))
         
         register_validation = RegisterValidation(user.get('name'), email, new_password, confirm_new_password, user.get('phone'))
 
         is_password_valid, message = register_validation.validate_password()
         if not is_password_valid:
-            return redirect(url_for('change_password', message=message))
+            flash(message, 'danger')
+            return redirect(url_for('change_password'))
         
         new_pwd_hash = hash_password(new_password)
         
         db_client.update_user(email, {'pwd_hash': new_pwd_hash})
-        print('Senha alterada com sucesso.')
-        return redirect(url_for('user_page', message='Senha alterada com sucesso'))
+        flash('Senha alterada com sucesso', 'success')
+        return redirect(url_for('user_page'))
 
     return render_template('change_password.html')
 
 @app.route('/user_page', methods=['GET', 'POST'])
 def user_page():
     if 'user_id' not in session:
-        print('Usuario nao logado')
-        return redirect(url_for('login', message='Faça login para acessar a página do usuário.'))
+        flash('Faça login para acessar a página do usuário.', 'danger')
+        return redirect(url_for('login'))
 
     user_id = session['user_id']
     user = db_client.get_user_by_id(ObjectId(user_id))
@@ -269,25 +273,25 @@ def change_phone():
         password = request.form['senha'].strip()
 
         if not "@" in email or not "." in email:
-            print('Formato de email inválido')
-            return redirect(url_for('change_phone', message='Formato de e-mail inválido.'))
+            flash('Formato de email inválido', 'danger')
+            return redirect(url_for('change_phone'))
         
         user = db_client.get_user(email)
         if not user:
-            print('Usuário não cadastrado')
-            return redirect(url_for('change_phone', message='Usuário não cadastrado'))
+            flash('Usuário não cadastrado', 'danger')
+            return redirect(url_for('change_phone'))
         
         if not check_password(password, user.get('pwd_hash')):
-            print('Senha incorreta')
-            return redirect(url_for('change_phone', message='Senha incorreta'))
+            flash('Senha incorreta', 'danger')
+            return redirect(url_for('change_phone'))
         
         if user.get('phone') != old_number:
-            print('Telefone antigo incorreto')
-            return redirect(url_for('change_phone', message='Telefone antigo incorreto'))
+            flash('Telefone antigo incorreto', 'danger')
+            return redirect(url_for('change_phone'))
         
         db_client.update_user(email, {'phone': new_number})
-        print('Telefone alterado com sucesso.')
-        return redirect(url_for('user_page', message='Telefone alterado com sucesso'))
+        flash('Telefone alterado com sucesso', 'success')
+        return redirect(url_for('user_page'))
 
     return render_template('change_phone.html')
 
@@ -296,7 +300,8 @@ def delete_checklist():
     if request.method == 'POST':
         checklist_id = request.form['checklist_id']
         db_client.db.userChecklist.delete_one({"_id": ObjectId(checklist_id)})
-        return redirect(url_for('user_page', message='Checklist deletado com sucesso.'))
+        flash('Checklist deletado com sucesso', 'success')
+        return redirect(url_for('user_page'))
 
     return redirect(url_for('user_page', message='Erro ao deletar checklist.'))
 
@@ -305,7 +310,8 @@ def save_checklist():
     if request.method == 'POST':
         user_id = session.get('user_id')
         if not user_id:
-            return redirect(url_for('login', message='Por favor, faça login para salvar o checklist.'))
+            flash('Faça login para salvar o checklist.', 'danger')
+            return redirect(url_for('login'))
         
         checklist_id = request.form.get('checklist_id')
         form_data = request.form.to_dict()
@@ -317,20 +323,24 @@ def save_checklist():
         }
 
         db_client.update_user_checklist(ObjectId(checklist_id), updates)
-        return redirect(url_for('user_page', message='Checklist atualizado com sucesso.'))
+        flash('Checklist atualizado com sucesso.', 'success')
+        return redirect(url_for('user_page'))
 
-    return redirect(url_for('user_page', message='Erro ao salvar checklist.'))
+    flash('Erro ao salvar checklist.', 'danger')
+    return redirect(url_for('user_page'))
 
 @app.route('/new_checklist', methods=['POST'])
 def new_checklist():
     if request.method == 'POST':
         user_id = session.get('user_id')
         if not user_id:
-            return redirect(url_for('login', message='Por favor, faça login para criar um novo checklist.'))
+            flash('Faça login para criar um novo checklist.', 'danger')
+            return redirect(url_for('login'))
 
         checklist_name = request.form.get('checklist_name')
         if not checklist_name:
-            return redirect(url_for('user_page', message='Nome do checklist não pode estar vazio.'))
+            flash('Nome do checklist não pode estar vazio.', 'danger')
+            return redirect(url_for('user_page'))
 
         # Criar um novo checklist
         new_checklist = {
@@ -343,9 +353,11 @@ def new_checklist():
 
         db_client.db.userChecklist.insert_one(new_checklist)
 
-        return redirect(url_for('user_page', message='Novo checklist criado com sucesso.'))
+        flash('Novo checklist criado com sucesso.', 'success')
+        return redirect(url_for('user_page'))
 
-    return redirect(url_for('user_page', message='Erro ao criar novo checklist.'))
+    flash('Erro ao criar novo checklist.', 'danger')
+    return redirect(url_for('user_page'))
 
 @app.route('/export_checklist', methods=['POST'])
 def export_checklist():
@@ -370,7 +382,8 @@ def export_checklist():
             download_name='checklist.pdf'
         )
 
-    return redirect(url_for('user_page', message='Erro ao exportar checklist.'))
+    flash('Erro ao exportar checklist.', 'danger')
+    return redirect(url_for('user_page'))
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
@@ -380,9 +393,10 @@ def contact():
         message = request.form['mensagem'].strip()
 
         if not "@" in email or not "." in email:
-            print('Formato de email inválido')
-            return redirect(url_for('contact', message='Formato de e-mail inválido.'))
+            flash('Formato de email inválido', 'danger')
+            return redirect(url_for('contact'))
 
-        return redirect(url_for('home', message='E-mail enviado para o suporte.'))
+        flash('E-mail enviado para o suporte.', 'success')
+        return redirect(url_for('home'))
 
     return render_template('contact.html')        

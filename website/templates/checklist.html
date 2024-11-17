@@ -57,6 +57,17 @@
  <header class="masthead">
   <br>
   <div class="container mt-5">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          {% for category, message in messages %}
+            alert("{{ message }}");
+          {% endfor %}
+        });
+      </script>
+    {% endif %}
+  {% endwith %}
     <form id="checklistForm" method="POST" action="{{ url_for('save_checklist') }}">
       <input type="hidden" name="checklist_id" value="{{ checklist_id }}">
       {% for module_index, (module, questions) in enumerate(template.items()) %}

@@ -76,15 +76,22 @@ class BuildTemplate:
         for module, questions in template.items():
             pdf.set_font("Arial", 'B', size=14)
             pdf.cell(200, 10, txt=module, ln=True, align='L')
-            pdf.set_font("Arial", size=12)
             for question in questions:
+                pdf.set_font("Arial", size=12)
                 question_text = list(question.keys())[0]
                 answer = question.get('answer', '')
                 notes = question.get('notes', '')
                 glossary = question.get('glossary', '')
+                if answer == True:
+                    answer = "Sim"
+                elif answer == False:
+                    answer = "Não"
+                else:
+                    answer = "Não se aplica"
                 pdf.cell(200, 10, txt=f"P: {question_text}", ln=True, align='L')
                 pdf.cell(200, 10, txt=f"R: {answer}", ln=True, align='L')
                 pdf.cell(200, 10, txt=f"Anotações: {notes}", ln=True, align='L')
+                pdf.set_font("Arial", size=10, style='I')
                 pdf.cell(200, 10, txt=f"Glossário: {glossary}", ln=True, align='L')
                 pdf.ln(5)
 

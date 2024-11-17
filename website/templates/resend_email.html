@@ -59,6 +59,17 @@
             <div class="content">
                 <h3>Re-enviar E-mail</h3>
                 <hr />
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                  <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                      {% for category, message in messages %}
+                        alert("{{ message }}");
+                      {% endfor %}
+                    });
+                  </script>
+                {% endif %}
+              {% endwith %}
                 <form method="POST" action="{{ url_for('resend_email_code') }}">
                     <div class="form-group">
                         <label for="email">Endereço de Email</label>

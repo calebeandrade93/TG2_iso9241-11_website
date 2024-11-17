@@ -67,6 +67,17 @@
       <div class="row h-100 align-items-center">
         <div class="col-12 text-center">
           <h1 class="fw-light">Lista de Checklists</h1><br>
+          {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <script>
+              document.addEventListener('DOMContentLoaded', function() {
+                {% for category, message in messages %}
+                  alert("{{ message }}");
+                {% endfor %}
+              });
+            </script>
+          {% endif %}
+        {% endwith %}
           <form id="checklist-form" method="POST" action="">
             <div class="row checklist-container">
               {% for checklist in user_checklists %}

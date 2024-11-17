@@ -152,3 +152,11 @@ div.content {
 body {
   background-color: #e2e2e2; /* Cor de fundo cinza para toda a página */
 }
+
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.contact-form .form-control {
+  max-width: 100%;
+}
