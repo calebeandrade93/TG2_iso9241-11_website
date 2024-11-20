@@ -57,7 +57,7 @@ div.content {
 .sidebar {
   height: 100%;
   width: 250px;
-  position: absolute; /* Alterar para absolute para que a sidebar mova junto com a tela */
+  position: absolute; 
   top: 0;
   left: 0;
   background-color: #f8f9fa;
@@ -67,7 +67,7 @@ div.content {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 1; /* Garantir que a sidebar tenha um z-index menor */
+  z-index: 1; 
 }
 
 .sidebar h4 {
@@ -90,7 +90,7 @@ div.content {
 .content {
   margin-left: 260px;
   padding: 20px;
-  padding-bottom: 100px; /* Adiciona espaço extra na parte inferior */
+  padding-bottom: 100px;
 }
 
 /* Estilo para os blocos de checklist */
@@ -141,7 +141,7 @@ div.content {
 
 /* Estilo para o estado selecionado */
 .custom-button.selected {
-  background-color: #d3d3d3; /* Cinza claro */
+  background-color: #d3d3d3;
 }
 
 /* Adicionar espaço entre o ícone de rádio e o texto */
@@ -150,7 +150,7 @@ div.content {
 }
 
 body {
-  background-color: #e2e2e2; /* Cor de fundo cinza para toda a página */
+  background-color: #e2e2e2;
 }
 
 .contact-form {
@@ -159,4 +159,10 @@ body {
 }
 .contact-form .form-control {
   max-width: 100%;
+}
+
+/* Estilo para o título do módulo */
+.module-title {
+  font-size: 1.25rem; 
+  font-weight: bold;
 }
