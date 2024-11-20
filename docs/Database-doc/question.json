@@ -1,12 +1,382 @@
-{
-    "descripton": "A tela apresentada possui botão de fechar no canto superior direito ?",
-    "glossary": ["67201465a701f43299a9e36a", "672015a5a701f43299a9e36b"]
-},
-{
-    "descripton": "A tela apresentada possui botão de minimizar e maximizar ?",
-    "glossary": ["672015a5a701f43299a9e36b", "672015a5a701f43299a9e36c"]
-},
-{
-    "descripton": "O duplo clique do mouse tem a função de enter ?",
-    "glossary": ["672015a5a701f43299a9e36d"]
-}
+[
+    {
+        "description": "O sistema permite que os usuários definam claramente seus objetivos antes de iniciar uma tarefa?",
+        "glossary": "Metas específicas que os usuários desejam alcançar ao interagir com um sistema, produto ou serviço.",
+        "module": "Eficácia"
+    },
+    {
+        "description": "Os usuários conseguem completar suas tarefas sem precisar de assistência externa?",
+        "glossary": "Suporte ou ajuda que os usuários precisam de outras pessoas ou fontes externas para completar suas tarefas.",
+        "module": "Eficácia"
+    },
+    {
+        "description": "O sistema fornece orientações ou dicas que ajudam os usuários a alcançar seus objetivos?",
+        "glossary": "Instruções ou sugestões fornecidas pelo sistema que ajudam os usuários a entender como realizar tarefas de forma eficaz.",
+        "module": "Eficácia"
+    },
+    {
+        "description": "Os usuários relatam que conseguem atingir seus objetivos de forma consistente ao usar o sistema?",
+        "glossary": "A capacidade dos usuários de alcançar seus objetivos de maneira repetida e confiável ao usar o sistema.",
+        "module": "Eficácia"
+    },
+    {
+        "description": "O sistema permite que os usuários revisem e ajustem seus objetivos durante a interação?",
+        "glossary": "A possibilidade de os usuários modificarem seus objetivos durante a interação com o sistema, conforme necessário.",
+        "module": "Eficácia"
+    },
+    {
+        "description": "As instruções do sistema são claras o suficiente para que os usuários realizem as tarefas corretamente?",
+        "glossary": "Diretrizes que são compreensíveis e fáceis de seguir, permitindo que os usuários realizem tarefas com precisão.",
+        "module": "Eficácia"
+    },
+    {
+        "description": "Os usuários conseguem realizar as tarefas sem cometer erros significativos?",
+        "glossary": "Falhas ou enganos que ocorrem durante a execução de tarefas, que podem impactar negativamente os resultados.",
+        "module": "Eficácia"
+    },
+    {
+        "description": "O sistema fornece feedback imediato sobre a precisão das ações dos usuários?",
+        "glossary": "Respostas ou informações fornecidas pelo sistema em tempo real, que ajudam os usuários a entender se suas ações estão corretas.",
+        "module": "Eficácia"
+    },
+    {
+        "description": "Os usuários conseguem identificar e corrigir erros facilmente durante a execução das tarefas?",
+        "glossary": "A capacidade dos usuários de reconhecer e corrigir falhas durante a execução de tarefas.",
+        "module": "Eficácia"
+    },
+    {
+        "description": "O sistema apresenta informações de forma que os usuários possam verificar a completude de suas tarefas?",
+        "glossary": "A extensão em que todas as etapas necessárias para concluir uma tarefa foram realizadas com sucesso.",
+        "module": "Eficácia"
+    },
+    {
+        "description": "As funcionalidades do sistema são testadas para garantir que atendem aos objetivos dos usuários?",
+        "glossary": "Recursos e capacidades do sistema que foram avaliados para garantir que atendem às necessidades e objetivos dos usuários.",
+        "module": "Eficácia"
+    },
+    {
+        "description": "O sistema permite que os usuários confirmem a precisão das informações antes de finalizar uma tarefa?",
+        "glossary": "A possibilidade de os usuários verificar a exatidão das informações ou ações antes de finalizar uma tarefa.",
+        "module": "Eficácia"
+    },
+    {
+        "description": "O sistema permite que os usuários completem suas tarefas utilizando o mínimo de tempo possível?",
+        "glossary": "Relação entre os recursos utilizados (neste caso, o tempo) e os resultados alcançados. A eficiência é medida pela quantidade de tempo que os usuários levam para completar suas tarefas em relação ao que é considerado ideal.",
+        "module": "Eficiência"
+    },
+    {
+        "description": "Os usuários conseguem realizar suas tarefas com um esforço físico e cognitivo reduzido ao usar o sistema?",
+        "glossary": "O esforço mental e físico gasto para completar tarefas especificadas. Um sistema eficiente deve minimizar esse esforço para facilitar a interação do usuário.",
+        "module": "Eficiência"
+    },
+    {
+        "description": "O sistema oferece funcionalidades que ajudam os usuários a economizar tempo durante a execução de tarefas?",
+        "glossary": "Refere-se aos diferentes tipos de recursos que os usuários empregam ao interagir com um sistema, incluindo tempo e esforço. Funcionalidades que economizam tempo são consideradas uma melhoria na eficiência do sistema.",
+        "module": "Eficiência"
+    },
+    {
+        "description": "Os usuários percebem que o sistema minimiza o uso de recursos, como cliques ou navegação desnecessária, para completar suas tarefas?",
+        "glossary": "A eficiência também pode ser avaliada pela quantidade de interações necessárias (como cliques) para alcançar um resultado. Um sistema que minimiza interações desnecessárias é considerado mais eficiente.",
+        "module": "Eficiência"
+    },
+    {
+        "description": "Existe uma forma de os usuários monitorarem o tempo e os recursos que estão utilizando durante a execução de suas tarefas?",
+        "glossary": "O tempo gasto na tentativa de alcançar um objetivo. A capacidade de monitorar esse tempo pode ajudar os usuários a avaliar sua eficiência ao usar o sistema.",
+        "module": "Eficiência"
+    },
+    {
+        "description": "O sistema responde rapidamente às ações dos usuários, permitindo uma experiência fluida?",
+        "glossary": "O tempo que o sistema leva para responder a uma ação do usuário. Um tempo de resposta rápido é essencial para uma interação eficiente e satisfatória.",
+        "module": "Eficiência"
+    },
+    {
+        "description": "Os usuários percebem que o tempo de espera para a resposta do sistema é aceitável durante a execução de suas tarefas?",
+        "glossary": "A aceitabilidade do tempo de espera é uma medida subjetiva que pode impactar a satisfação do usuário e, consequentemente, a percepção de eficiência do sistema.",
+        "module": "Eficiência"
+    },
+    {
+        "description": "O sistema fornece feedback imediato após as ações dos usuários, ajudando-os a entender o resultado de suas interações?",
+        "glossary": "Informação fornecida ao usuário sobre o resultado de suas ações. Um feedback imediato é importante para a eficiência, pois permite que os usuários ajustem suas ações rapidamente.",
+        "module": "Eficiência"
+    },
+    {
+        "description": "Existem situações em que o tempo de resposta do sistema impacta negativamente a capacidade dos usuários de completar suas tarefas?",
+        "glossary": "Um tempo de resposta inadequado pode levar a frustrações e ineficiências, impactando a eficácia e a satisfação do usuário.",
+        "module": "Eficiência"
+    },
+    {
+        "description": "O sistema é projetado para minimizar atrasos e garantir que as respostas sejam entregues em tempo hábil?",
+        "glossary": "A minimização de atrasos é uma característica de um sistema eficiente, que busca otimizar o tempo de resposta e a utilização de recursos.",
+        "module": "Eficiência"
+    },
+    {
+        "description": "O sistema fornece feedback claro e compreensível após as ações do usuário?",
+        "glossary": "Informação fornecida ao usuário sobre o resultado de suas ações, que pode incluir confirmações, erros ou sugestões de melhoria.",
+        "module": "Satisfação do Usuário"
+    },
+    {
+        "description": "Como a qualidade do feedback impacta a percepção de eficácia e eficiência do usuário?",
+        "glossary": "A qualidade de ser facilmente compreensível, sem ambiguidade, permitindo que o usuário entenda rapidamente o que ocorreu.",
+        "module": "Satisfação do Usuário"
+    },
+    {
+        "description": "O feedback é fornecido em tempo hábil para que o usuário possa entender o resultado de suas ações?",
+        "glossary": "O tempo necessário para fornecer feedback que permita ao usuário tomar decisões informadas rapidamente.",
+        "module": "Satisfação do Usuário"
+    },
+    {
+        "description": "Existem diferentes tipos de feedback (visual, auditivo, tátil) disponíveis para atender às preferências dos usuários?",
+        "glossary": "Informação fornecida ao usuário sobre o resultado de suas ações, que pode incluir confirmações, erros ou sugestões de melhoria.",
+        "module": "Satisfação do Usuário"
+    },
+    {
+        "description": "O sistema é projetado para atender às necessidades de usuários com diferentes níveis de habilidade?",
+        "glossary": "Expectativas e requisitos que os usuários têm em relação ao sistema, que devem ser atendidos para garantir satisfação.",
+        "module": "Satisfação do Usuário"
+    },
+    {
+        "description": "Como a experiência do usuário é avaliada em relação à satisfação dos usuários após a interação com o sistema?",
+        "glossary": "Percepções e respostas do usuário que resultam do uso e/ou uso antecipado de um sistema, produto ou serviço. Inclui emoções, crenças e preferências.",
+        "module": "Satisfação do Usuário"
+    },
+    {
+        "description": "Existem adaptações ou personalizações disponíveis para melhorar a experiência de usuários com habilidades variadas?",
+        "glossary": "Modificações feitas no sistema para atender melhor às necessidades individuais dos usuários, especialmente aqueles com habilidades variadas.",
+        "module": "Satisfação do Usuário"
+    },
+    {
+        "description": "Que medidas são tomadas para garantir que a experiência do usuário seja positiva e atenda às expectativas dos usuários?",
+        "glossary": "O que os usuários antecipam ou desejam obter ao interagir com o sistema, que pode influenciar sua satisfação.",
+        "module": "Satisfação do Usuário"
+    },
+    {
+        "description": "Existe uma documentação clara que descreve as condições do ambiente (físico, técnico e social) em que o sistema será utilizado?",
+        "glossary": "Conjunto de condições físicas, técnicas e sociais em que o sistema é utilizado, incluindo fatores como temperatura, iluminação e suporte técnico. A documentação deve registrar essas características para entender o contexto de uso.",
+        "module": "Contexto de Uso"
+    },
+    {
+        "description": "O sistema foi projetado para ser flexível o suficiente para se adaptar a diferentes perfis de usuários e suas necessidades específicas?",
+        "glossary": "Capacidade do sistema de se adaptar a diferentes perfis de usuários, considerando suas habilidades, experiências e necessidades específicas, permitindo uma melhor usabilidade.",
+        "module": "Contexto de Uso"
+    },
+    {
+        "description": "Como as características dos usuários, como habilidades e experiência, foram levadas em conta na definição do contexto de uso?",
+        "glossary": "Atributos como habilidades, experiência e conhecimento que são relevantes para a usabilidade do sistema. Essas características devem ser consideradas na definição do contexto de uso para garantir que o sistema atenda às necessidades dos usuários.",
+        "module": "Contexto de Uso"
+    },
+    {
+        "description": "O contexto de uso foi claramente definido, incluindo informações sobre os usuários, suas tarefas e o ambiente em que o sistema será utilizado?",
+        "glossary": "A descrição abrangente que inclui informações sobre os usuários, suas tarefas e o ambiente em que o sistema será utilizado, essencial para entender como o sistema será interagido.",
+        "module": "Contexto de Uso"
+    },
+    {
+        "description": "Quais métodos foram utilizados para identificar e documentar o contexto de uso específico para o sistema?",
+        "glossary": "Técnicas utilizadas para coletar e documentar informações sobre o contexto de uso, como entrevistas, observações e questionários, que ajudam a entender as necessidades e condições dos usuários.",
+        "module": "Contexto de Uso"
+    },
+    {
+        "description": "Existe uma análise das interações entre os diferentes componentes do contexto de uso (usuários, tarefas e ambiente)?",
+        "glossary": "Relações entre usuários, tarefas e ambiente que podem afetar a usabilidade do sistema. A análise dessas interações é crucial para identificar como cada componente influencia a experiência do usuário.",
+        "module": "Contexto de Uso"
+    },
+    {
+        "description": "Como as variações no contexto de uso podem impactar a usabilidade do sistema?",
+        "glossary": "Mudanças nas condições de uso que podem impactar a eficácia e a eficiência do sistema. Essas variações podem resultar em diferentes níveis de usabilidade dependendo do contexto específico.",
+        "module": "Contexto de Uso"
+    },
+    {
+        "description": "As necessidades específicas dos usuários foram identificadas e documentadas durante o processo de design do sistema?",
+        "glossary": "Expectativas e requisitos que os usuários têm em relação ao sistema, que devem ser identificadas e documentadas para garantir que o design atenda a essas necessidades.",
+        "module": "Contexto de Uso"
+    },
+    {
+        "description": "Que métodos foram utilizados para garantir que as necessidades dos usuários fossem consideradas no design?",
+        "glossary": "Técnicas utilizadas para garantir que as necessidades dos usuários sejam consideradas, como entrevistas e testes de usabilidade, que ajudam a alinhar o design às expectativas dos usuários.",
+        "module": "Contexto de Uso"
+    },
+    {
+        "description": "Como o design do sistema atende às diferentes necessidades e expectativas dos usuários?",
+        "glossary": "A forma como o design do sistema responde às expectativas e requisitos dos usuários, garantindo que suas necessidades sejam atendidas para uma experiência satisfatória.",
+        "module": "Contexto de Uso"
+    },
+    {
+        "description": "Existem mecanismos para coletar feedback dos usuários sobre suas necessidades e como elas são atendidas pelo sistema?",
+        "glossary": "Informações coletadas dos usuários sobre suas experiências e necessidades, que podem ser utilizadas para melhorar o sistema. Mecanismos de coleta, como questionários e entrevistas, são essenciais para obter esse feedback.",
+        "module": "Contexto de Uso"
+    },
+    {
+        "description": "A apresentação visual dos elementos de interação é consistente em todas as telas do sistema?",
+        "glossary": "A uniformidade na aparência dos elementos de interface, como botões, cores e fontes, que ajuda os usuários a reconhecer e entender rapidamente como interagir com o sistema.",
+        "module": "Consistência"
+    },
+    {
+        "description": "Os padrões de design utilizados no sistema são aplicados de forma consistente em diferentes partes da interface?",
+        "glossary": "Conjuntos de diretrizes que definem como os elementos de interface devem ser apresentados e interagir. A aplicação consistente desses padrões é crucial para a usabilidade.",
+        "module": "Consistência"
+    },
+    {
+        "description": "A terminologia utilizada no sistema é a mesma em todas as seções e funcionalidades?",
+        "glossary": "O uso uniforme de palavras e frases em todo o sistema, que ajuda a evitar confusão e facilita a compreensão dos usuários sobre as funções e características do sistema.",
+        "module": "Consistência"
+    },
+    {
+        "description": "Os ícones e símbolos utilizados no sistema têm significados consistentes em diferentes contextos?",
+        "glossary": "A manutenção do mesmo significado para ícones e símbolos em diferentes partes do sistema, o que é fundamental para que os usuários possam interpretar corretamente as ações disponíveis.",
+        "module": "Consistência"
+    },
+    {
+        "description": "As mensagens de erro e feedback do sistema seguem um formato e estilo consistentes?",
+        "glossary": "A uniformidade na forma como o sistema comunica erros e fornece feedback aos usuários, o que é importante para a compreensão e a resposta adequada dos usuários às mensagens.",
+        "module": "Consistência"
+    },
+    {
+        "description": "Os elementos de navegação são apresentados de maneira consistente em todas as páginas do sistema?",
+        "glossary": "Componentes que permitem aos usuários se moverem entre diferentes partes do sistema. A consistência na apresentação desses elementos é vital para uma navegação intuitiva.",
+        "module": "Consistência"
+    },
+    {
+        "description": "A documentação e os materiais de ajuda utilizam a mesma terminologia e estilo visual que o sistema?",
+        "glossary": "A uniformidade na terminologia e no estilo visual entre o sistema e seus materiais de suporte, que ajuda a garantir que os usuários possam facilmente transferir seu conhecimento do sistema para a documentação.",
+        "module": "Consistência"
+    },
+    {
+        "description": "O sistema oferece opções para que os usuários personalizem a interface de acordo com suas preferências?",
+        "glossary": "A capacidade dos usuários de modificar a aparência e a disposição dos elementos da interface para atender às suas necessidades e preferências individuais.",
+        "module": "Flexibilidade e Controle"
+    },
+    {
+        "description": "Os usuários podem ajustar as configurações do sistema para otimizar sua experiência de uso?",
+        "glossary": "Opções disponíveis no sistema que permitem aos usuários modificar parâmetros, como notificações, temas e preferências de exibição, para melhorar sua interação.",
+        "module": "Flexibilidade e Controle"
+    },
+    {
+        "description": "O sistema permite que os usuários salvem suas preferências de personalização para uso futuro?",
+        "glossary": "A funcionalidade que permite aos usuários armazenar suas configurações personalizadas, garantindo que suas escolhas sejam mantidas em sessões futuras.",
+        "module": "Flexibilidade e Controle"
+    },
+    {
+        "description": "Os usuários têm a capacidade de desfazer ou refazer ações durante suas interações com o sistema?",
+        "glossary": "A possibilidade de os usuários reverterem ou repetirem ações, o que proporciona maior flexibilidade e segurança durante a interação.",
+        "module": "Flexibilidade e Controle"
+    },
+    {
+        "description": "O sistema fornece feedback claro sobre as ações que os usuários podem realizar?",
+        "glossary": "Informações visuais ou auditivas que indicam aos usuários o resultado de suas interações, ajudando-os a entender o que está acontecendo no sistema.",
+        "module": "Flexibilidade e Controle"
+    },
+    {
+        "description": "Os usuários podem navegar livremente entre diferentes seções do sistema sem restrições?",
+        "glossary": "A capacidade de os usuários se moverem entre diferentes partes do sistema sem limitações, permitindo uma exploração mais flexível.",
+        "module": "Flexibilidade e Controle"
+    },
+    {
+        "description": "O sistema permite que os usuários ajustem a velocidade ou a intensidade de suas interações?",
+        "glossary": "A possibilidade de os usuários modificarem a rapidez ou a força com que interagem com o sistema, como a velocidade de animações ou a sensibilidade de controles.",
+        "module": "Flexibilidade e Controle"
+    },
+    {
+        "description": "Os usuários têm a opção de escolher entre diferentes modos de operação (por exemplo, modo avançado ou básico)?",
+        "glossary": "Diferentes configurações ou interfaces que atendem a diferentes níveis de habilidade ou necessidade dos usuários, permitindo que escolham a que melhor se adapta a eles.",
+        "module": "Flexibilidade e Controle"
+    },
+    {
+        "description": "O sistema permite que os usuários acessem rapidamente funções frequentemente utilizadas?",
+        "glossary": "A capacidade de os usuários acessarem facilmente as funcionalidades que utilizam com mais frequência, melhorando a eficiência e a satisfação.",
+        "module": "Flexibilidade e Controle"
+    },
+    {
+        "description": "Os usuários podem personalizar as notificações e alertas recebidos do sistema?",
+        "glossary": "A opção de os usuários ajustarem quais alertas e mensagens recebem, permitindo que filtrem informações relevantes e minimizem distrações.",
+        "module": "Flexibilidade e Controle"
+    },
+    {
+        "description": "O sistema possui validações em tempo real para evitar entradas de dados incorretas?",
+        "glossary": "Mecanismos que verificam a precisão e a conformidade dos dados inseridos pelo usuário enquanto ele ainda está digitando, prevenindo erros antes que sejam confirmados.",
+        "module": "Proteção contra Erros"
+    },
+    {
+        "description": "Existem dicas ou sugestões disponíveis para ajudar os usuários a evitar erros comuns?",
+        "glossary": "Informações ou orientações fornecidas pelo sistema que ajudam os usuários a evitar erros frequentes, melhorando a experiência de uso.",
+        "module": "Proteção contra Erros"
+    },
+    {
+        "description": "O sistema impede ações que poderiam resultar em erros críticos, como exclusão acidental de dados?",
+        "glossary": "Mecanismos que bloqueiam ou solicitam confirmação antes de realizar ações que podem causar perda de dados ou outras consequências negativas.",
+        "module": "Proteção contra Erros"
+    },
+    {
+        "description": "As mensagens de erro são apresentadas de forma clara e compreensível para o usuário?",
+        "glossary": "A facilidade com que os usuários podem entender o que uma mensagem de erro significa e quais ações devem ser tomadas em resposta.",
+        "module": "Proteção contra Erros"
+    },
+    {
+        "description": "As mensagens de erro fornecem orientações sobre como corrigir o problema?",
+        "glossary": "Instruções incluídas nas mensagens de erro que ajudam os usuários a resolver o problema que causou o erro, facilitando a recuperação.",
+        "module": "Proteção contra Erros"
+    },
+    {
+        "description": "O sistema utiliza linguagem simples e acessível nas mensagens de erro?",
+        "glossary": "O uso de termos e frases que são facilmente compreensíveis para a maioria dos usuários, evitando jargões técnicos que possam confundir.",
+        "module": "Proteção contra Erros"
+    },
+    {
+        "description": "As mensagens de erro são exibidas em um formato que destaca a gravidade do problema?",
+        "glossary": "A forma como as mensagens de erro são apresentadas visualmente, indicando a seriedade do erro e ajudando os usuários a priorizar suas ações.",
+        "module": "Proteção contra Erros"
+    },
+    {
+        "description": "O sistema permite que os usuários revisem e corrijam entradas antes de finalizá-las?",
+        "glossary": "A funcionalidade que permite aos usuários verificar e modificar suas entradas antes de confirmar ações, reduzindo a probabilidade de erros.",
+        "module": "Proteção contra Erros"
+    },
+    {
+        "description": "O sistema registra erros de forma que os usuários possam revisá-los posteriormente?",
+        "glossary": "A capacidade do sistema de manter um histórico de erros ocorridos, permitindo que os usuários revisem e aprendam com suas experiências passadas.",
+        "module": "Proteção contra Erros"
+    },
+    {
+        "description": "A quantidade de informações apresentadas na interface é adequada para a tarefa em questão?",
+        "glossary": "Refere-se ao volume de dados ou conteúdo exibido ao usuário, que deve ser suficiente para a realização da tarefa sem causar sobrecarga cognitiva.",
+        "module": "Densidade Informacional"
+    },
+    {
+        "description": "As informações são organizadas de forma que o usuário possa facilmente encontrar o que precisa?",
+        "glossary": "A disposição e a estrutura das informações na interface, que devem facilitar a localização e a compreensão dos dados relevantes para o usuário.",
+        "module": "Densidade Informacional"
+    },
+    {
+        "description": "As fontes utilizadas nas interfaces são legíveis e apropriadas para o público-alvo?",
+        "glossary": "A facilidade com que o texto pode ser lido e compreendido, considerando fatores como tamanho da fonte, estilo e contraste com o fundo.",
+        "module": "Densidade Informacional"
+    },
+    {
+        "description": "As informações apresentadas são claras e concisas, evitando jargões desnecessários?",
+        "glossary": "A capacidade das informações de serem compreendidas rapidamente, sem ambiguidade, e de serem expressas de forma sucinta, evitando termos técnicos que possam confundir o usuário.",
+        "module": "Densidade Informacional"
+    },
+    {
+        "description": "O sistema minimiza o número de etapas necessárias para completar uma tarefa?",
+        "glossary": "Refere-se à quantidade de interações ou ações que o usuário deve realizar para alcançar um objetivo específico, que deve ser reduzida para aumentar a eficiência.",
+        "module": "Ações Mínimas"
+    },
+    {
+        "description": "As instruções para realizar uma tarefa são apresentadas de forma clara e acessível?",
+        "glossary": "Diretrizes que são facilmente compreensíveis e que orientam o usuário sobre como proceder em uma tarefa, evitando confusões.",
+        "module": "Ações Mínimas"
+    },
+    {
+        "description": "O sistema fornece feedback sobre o progresso do usuário durante a execução de uma tarefa?",
+        "glossary": "Informações que indicam ao usuário em que etapa do processo ele se encontra, ajudando a manter a motivação e a compreensão do que ainda precisa ser feito.",
+        "module": "Ações Mínimas"
+    },
+    {
+        "description": "As ações que o usuário deve realizar são destacadas de maneira a serem facilmente identificáveis?",
+        "glossary": "Elementos da interface que são visualmente diferenciados (como botões ou links) para que o usuário possa rapidamente identificar quais ações são necessárias.",
+        "module": "Ações Mínimas"
+    },
+    {
+        "description": "O sistema evita solicitações desnecessárias de confirmação ou validação durante o processo?",
+        "glossary": "Pedidos que requerem que o usuário valide ou confirme uma ação, que devem ser limitados para não interromper o fluxo de trabalho e evitar frustrações.",
+        "module": "Ações Mínimas"
+    }
+]
