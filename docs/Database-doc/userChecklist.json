@@ -1,0 +1,46 @@
+{
+    "user": "67201022a701f43299a9e369",
+    "name": "Tela de login do site da empresa XPTO",
+    "answers": [
+        {
+            "question": "6720165ca701f43299a9e36e",
+            "answer": true,
+            "notes": "Questão ainda em analise se será processada na tela"
+        },
+        {
+            "question": "6720165ca701f43299a9e36f",
+            "answer": false,
+            "notes": "Preciso rever esta questão"
+        },
+        {
+            "question": "6720165ca701f43299a9e370",
+            "answer": null,
+            "notes": "Não aplicável a minha tela"
+        }
+    ],
+    "created_at": "28/10/2024 19:25:29",
+    "updated_at": "28/10/2024 19:25:29"
+},
+{
+    "user": "67201022a701f43299a9e369",
+    "name": "Tela de login da loja do Zé",
+    "answers": [
+        {
+            "question": "6720165ca701f43299a9e36e",
+            "answer": false,
+            "notes": "Questão ainda em analise se será processada na tela"
+        },
+        {
+            "question": "6720165ca701f43299a9e36f",
+            "answer": null,
+            "notes": "Preciso rever esta questão"
+        },
+        {
+            "question": "6720165ca701f43299a9e370",
+            "answer": true,
+            "notes": "Não aplicável a minha tela"
+        }
+    ],
+    "created_at": "29/10/2024 19:25:29",
+    "updated_at": "29/10/2024 19:25:29"
+}

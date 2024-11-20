@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/style.css">
+  <link rel="icon" href="../static/asset/cps.jpg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>TelaAudit - Fatec Arthur de Azevedo</title>
+  <script type="text/javascript">
+    function redirectToHome() {
+        window.location.href = "{{ url_for('home') }}";
+    }
+</script>
+</head>
+
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="{{ url_for('home') }}">TelaAudit - Checklist de Usabilidade</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('user_page') }}">Meu perfil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('contact') }}">Contato</a>
+        </li>
+        {% if 'user_id' in session %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+ <!-- Content -->
+ <header class="masthead">
+  <br>
+  <div class="container mt-5">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          {% for category, message in messages %}
+            alert("{{ message }}");
+          {% endfor %}
+        });
+      </script>
+    {% endif %}
+  {% endwith %}
+    <form id="checklistForm" method="POST" action="{{ url_for('save_checklist') }}">
+      <input type="hidden" name="checklist_id" value="{{ checklist_id }}">
+      {% for module_index, (module, questions) in enumerate(template.items()) %}
+      <div class="accordion" id="accordion{{ module_index }}">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="heading{{ module_index }}">
+            <button class="accordion-button module-title" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ module_index }}" aria-expanded="true" aria-controls="collapse{{ module_index }}">
+              {{ module }}
+            </button>
+          </h2>
+          <div id="collapse{{ module_index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ module_index }}" data-bs-parent="#accordion{{ module_index }}">
+            <div class="accordion-body">
+              {% for question_index, question in enumerate(questions) %}
+              <div class="mb-3">
+                <label class="form-label"><strong>{{ question.keys() | list | first }}</strong></label>
+                <p>
+                  <input type="radio" name="answer_{{ question['question_id'] }}" value="True" {% if question.values() | list | first == true %}checked{% endif %}> Sim
+                  <span style="margin-right: 10px;"></span>
+                  <input type="radio" name="answer_{{ question['question_id'] }}" value="False" {% if question.values() | list | first == false %}checked{% endif %}> Não
+                  <span style="margin-right: 10px;"></span>
+                  <input type="radio" name="answer_{{ question['question_id'] }}" value="None" {% if question.values() | list | first == none %}checked{% endif %}> Não se aplica
+                </p>
+                <p><em>Anotações:</em></p>
+                <textarea class="form-control" name="notes_{{ question['question_id'] }}">{{ question['notes'] }}</textarea>
+                <p><em>Glossário:</em> {{ question['glossary'] }}</p>
+              </div>
+              <br> <!-- Quebra de linha extra -->
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      <div class="buttons mt-3 text-center">
+        {% if 'user_id' in session %}
+        <button type="submit" class="btn btn-success mx-2">Salvar</button>
+        {% endif %}
+    <button type="button" class="btn btn-danger mx-2" onclick="cancel()">Cancelar</button>
+  </div>
+</header>
+
+  <script src="../static/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function cancel() {
+      if (confirm("Tem certeza que deseja cancelar ? Você perderá o que não foi salvo.")) {
+        {% if 'user_id' in session %}
+        window.location.href = "{{ url_for('user_page') }}";
+        {% else %}
+          window.location.href = "{{ url_for('home') }}";
+        {% endif %}
+      }
+    }
+  </script>
+</body>
+
+</html>

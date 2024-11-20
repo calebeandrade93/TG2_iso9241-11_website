@@ -57,7 +57,7 @@
     <div class="back">
         <div class="div-center">
             <div class="content">
-                <h3>Registrar</h3>
+                <h3>Validar E-mail</h3>
                 <hr />
                 {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
@@ -70,39 +70,24 @@
                   </script>
                 {% endif %}
               {% endwith %}
-                <form method="POST" action="{{ url_for('register') }}">
-                    <div class="form-group">
-                        <label for="nome">Nome</label>
-                        <input type="text" class="form-control" id="nome" name="nome" placeholder="Seu nome" required>
-                    </div>
+                <form method="POST" action="{{ url_for('verify_email') }}">
                     <div class="form-group">
                         <label for="email">Endereço de Email</label>
                         <input type="text" class="form-control" id="email" name="email" placeholder="email@email.com"
                             required>
                     </div>
                     <div class="form-group">
-                        <label for="senha">Senha</label>
-                        <input type="password" class="form-control" id="senha" name="senha" placeholder="**********"
+                        <label for="email_code">Código</label>
+                        <input type="text" class="form-control" id="email_code" name="email_code" placeholder="00000000"
                             required>
                     </div>
-                    <div class="form-group">
-                        <label for="confirma_senha">Repita a Senha</label>
-                        <input type="password" class="form-control" id="confirma_senha" name="confirma_senha"
-                            placeholder="**********" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="telefone">Telefone/Celular</label>
-                        <input type="tel" class="form-control" id="telefone" name="telefone"
-                            placeholder="(xx)xxxxxx-xxxx" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Registrar</button>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
                     <button type="button" class="btn btn-secondary" onclick="redirectToHome()">Cancelar</button>
                     <hr />
-                    <p>Já é registrado ? <a href="{{url_for('login')}}">Faça o Login</a></p>
-                    <p>Esqueceu a senha ? <a href="{{url_for('forgot_password')}}">Recuperar Senha</a></p>
+                    <p>O código não chegou ? <a href="{{url_for('resend_email_code')}}">Reenvie o código</a></p>
                 </form>
             </div>
         </div>
     </div>
-</body>
+
 </html>

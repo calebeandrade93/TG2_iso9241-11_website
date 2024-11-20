@@ -57,7 +57,7 @@
     <div class="back">
         <div class="div-center">
             <div class="content">
-                <h3>Registrar</h3>
+                <h3>Troca número telefone</h3>
                 <hr />
                 {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
@@ -70,14 +70,10 @@
                   </script>
                 {% endif %}
               {% endwith %}
-                <form method="POST" action="{{ url_for('register') }}">
-                    <div class="form-group">
-                        <label for="nome">Nome</label>
-                        <input type="text" class="form-control" id="nome" name="nome" placeholder="Seu nome" required>
-                    </div>
+                <form method="POST" action="{{ url_for('change_phone') }}">
                     <div class="form-group">
                         <label for="email">Endereço de Email</label>
-                        <input type="text" class="form-control" id="email" name="email" placeholder="email@email.com"
+                        <input type="email" class="form-control" id="email" name="email" placeholder="email@email.com"
                             required>
                     </div>
                     <div class="form-group">
@@ -86,23 +82,23 @@
                             required>
                     </div>
                     <div class="form-group">
-                        <label for="confirma_senha">Repita a Senha</label>
-                        <input type="password" class="form-control" id="confirma_senha" name="confirma_senha"
-                            placeholder="**********" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="telefone">Telefone/Celular</label>
-                        <input type="tel" class="form-control" id="telefone" name="telefone"
+                        <label for="telefone">Número antigo</label>
+                        <input type="tel" class="form-control" id="telefone_antigo" name="telefone_antigo"
                             placeholder="(xx)xxxxxx-xxxx" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Registrar</button>
+                    <div class="form-group">
+                        <label for="telefone">Número novo</label>
+                        <input type="tel" class="form-control" id="telefone_novo" name="telefone_novo"
+                            placeholder="(xx)xxxxxx-xxxx" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
                     <button type="button" class="btn btn-secondary" onclick="redirectToHome()">Cancelar</button>
                     <hr />
-                    <p>Já é registrado ? <a href="{{url_for('login')}}">Faça o Login</a></p>
-                    <p>Esqueceu a senha ? <a href="{{url_for('forgot_password')}}">Recuperar Senha</a></p>
                 </form>
             </div>
         </div>
     </div>
-</body>
+
+
+
 </html>
