@@ -257,7 +257,6 @@ def checklist():
         checklist_id = checklist.get('_id')
 
         template = BuildTemplate.build_for_front(questions, user_answers)
-        print('Template finalizado:' + str(template))
 
         return render_template('checklist.html', template=template, enumerate=enumerate, checklist_id=checklist_id)
         
@@ -368,6 +367,7 @@ def export_checklist():
         user_answers = checklist.get('answers')
 
         template = BuildTemplate.build_for_front(questions, user_answers)
+        print('!!!!!!Template finalizado para exportação !!!!!:' + str(template))
 
         pdf_content = BuildTemplate.build_pdf(template, 
                                                 checklist.get('name'), 

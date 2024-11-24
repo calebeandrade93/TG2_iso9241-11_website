@@ -66,20 +66,20 @@ class BuildTemplate:
 
         # Adicionar título e informações do checklist
         pdf.set_font("Arial", 'B', size=16)
-        pdf.cell(200, 10, txt=name, ln=True, align='C')
+        pdf.cell(0, 10, txt=name, ln=True, align='C')
         pdf.set_font("Arial", size=12)
-        pdf.cell(200, 10, txt=f"Data de criação: {created_at}", ln=True, align='L')
-        pdf.cell(200, 10, txt=f"Data de atualização: {updated_at}", ln=True, align='L')
+        pdf.cell(0, 10, txt=f"Data de criação: {created_at}", ln=True, align='L')
+        pdf.cell(0, 10, txt=f"Data de atualização: {updated_at}", ln=True, align='L')
         pdf.ln(10)
 
         # Adicionar módulos e perguntas
         for module, questions in template.items():
             pdf.set_font("Arial", 'B', size=14)
-            pdf.cell(200, 10, txt=module, ln=True, align='L')
+            pdf.cell(0, 10, txt=module, ln=True, align='L')
             for question in questions:
                 pdf.set_font("Arial", size=12)
                 question_text = list(question.keys())[0]
-                answer = question.get('answer', '')
+                answer = question.get(question_text)
                 notes = question.get('notes', '')
                 glossary = question.get('glossary', '')
                 if answer == True:
@@ -88,11 +88,11 @@ class BuildTemplate:
                     answer = "Não"
                 else:
                     answer = "Não se aplica"
-                pdf.cell(200, 10, txt=f"P: {question_text}", ln=True, align='L')
-                pdf.cell(200, 10, txt=f"R: {answer}", ln=True, align='L')
-                pdf.cell(200, 10, txt=f"Anotações: {notes}", ln=True, align='L')
+                pdf.multi_cell(0, 10, txt=f"P: {question_text}", align='J')
+                pdf.multi_cell(0, 10, txt=f"R: {answer}", align='J')
+                pdf.multi_cell(0, 10, txt=f"Anotações: {notes}", align='J')
                 pdf.set_font("Arial", size=10, style='I')
-                pdf.cell(200, 10, txt=f"Glossário: {glossary}", ln=True, align='L')
+                pdf.multi_cell(0, 10, txt=f"Glossário: {glossary}", align='J')
                 pdf.ln(5)
 
         return pdf.output(dest='S').encode('latin1')
