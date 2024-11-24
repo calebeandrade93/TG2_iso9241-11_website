@@ -79,7 +79,7 @@ class BuildTemplate:
             for question in questions:
                 pdf.set_font("Arial", size=12)
                 question_text = list(question.keys())[0]
-                answer = question.get('answer', '')
+                answer = question.get(question_text)
                 notes = question.get('notes', '')
                 glossary = question.get('glossary', '')
                 if answer == True:
