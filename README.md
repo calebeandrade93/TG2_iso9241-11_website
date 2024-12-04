@@ -88,3 +88,22 @@ Utilize o comando no bash ```flask --app server run``` este comando irá habilit
 
 ### Inicializando o servidor modo debug
 Utilize o comando no bash ```flask --app server run --debug``` este comando irá habilitar o servidor local host no modo debug.
+
+### Variáveis de ambiente
+Temos algumas variáveis de ambiente durante que deverão ser configuradas para rodar o site.
+Crie um arquivo **.env** na pasta website.
+As variáveis de ambiente utilizadas no código são:
+
+- Conta do email 
+EMAIL_PASSWORD='password'
+EMAIL_USERNAME='email@gmail.com'
+
+- Conexão com o banco de dados localhost
+MONGO_URI='mongodb://login:password@localhost:27017/'
+
+- Email para conexão (Neste exemplo estou usando o serviço de email da google)
+SMTP_SERVER='smtp.gmail.com'
+smtp_port=465
+
+PS: Existe um meio de gerar uma senha única para um email se conectar com uma aplicação. Dê uma pesquisada em como realizar tal atividade para terminar esta configuração.
+
